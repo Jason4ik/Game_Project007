@@ -1,7 +1,5 @@
 from os import system
 import time
-from Game import Driver
-from Game import Race
 from Car import Car
 
 car_dict = {
@@ -18,14 +16,32 @@ car_dict = {
 }
 
 class CarShop:
-    def __init__(self, car_name, car_model, car_top_speed, car_xp):
-
-
-
-    def car_buy()
+    def __init__(self):
+        self.inventory = {}
         
+    def car_buy(self, car_name, car_model):
+        if car_name in car_dict and car_dict[car_name]['model'] == car_model:
+            car = car_dict[car_name]
+            self.inventory[car_name] = car
+            print(f"{car_name} {car_model} has been added to the inventory.")
+        else:
+            print(f"{car_name} {car_model} is not available in the car_dict.")
+    
+    def car_sell(self, car_name):
+        if car_name in self.inventory:
+            del self.inventory[car_name]
+            print(f"{car_name} has been sold.")
+        else:
+            print(f"{car_name} is not available in the inventory.")
 
-    def car_sell()
-        
-    def garage()
-        car_dict
+
+my_shop = CarShop()
+my_shop.car_buy("Aston Martin", "DB9")
+my_shop.car_buy("Ford Mustang", "GT")
+
+my_shop = CarShop()
+
+my_shop.car_buy("Aston Martin", "DB9")
+my_shop.car_buy("Ford Mustang", "GT")
+my_shop.car_sell("Aston Martin")
+my_shop.car_sell("Chevy Camaro")
