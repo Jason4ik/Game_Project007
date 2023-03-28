@@ -1,7 +1,7 @@
 from os import system
 import time
 from CarShop import CarShop
-from Car import Car
+# from Car import Car
 
 class Driver:
     def __init__(self, name: str, age: int, glasses: str, gloves: str, shoes: str):
@@ -35,16 +35,25 @@ class Driver:
     def check_stats(self):
         print(f"Driver {self.name}".center(50, '='))
         print("Stats:")
-        print(f'\tAge: {self.age}')
-        print(f'\tMoney: {self.__money}$')
-        print(f'\tLevel: {self.__level}')
-        print(f'\tXP: {self.__xp}')
-        print(f'\tGlasses: {self.glasses}')
-        print(f'\tGloves: {self.gloves}')
-        print(f'\tShoes: {self.shoes}')
+        print(f'\tAge:        {self.age}')
+        print(f'\tMoney:      {self.__money}$')
+        print(f'\tLevel:      {self.__level}')
+        print(f'\tXP:         {self.__xp}')
+        print(f'\tGlasses:    {self.glasses}')
+        print(f'\tGloves:     {self.gloves}')
+        print(f'\tShoes:      {self.shoes}')
 class Race:
     pass
 
+class Game:
+    _instance = None
+    def __init__(self):
+        self.drivers = []
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
 
 if __name__ == "__main__":
     my_driver = Driver('Georg', 22, "Black", "Leather", 'Sneakers')
