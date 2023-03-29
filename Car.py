@@ -1,8 +1,21 @@
+""" class Car:
+    def __init__(self, car_name):
+        car = car_dict[car_name]
+        self.brand = car['make']
+        self.model = car['model']
+        self.price = car['Price']
+        self.top_speed = car['top_speed']
+        self.acceleration = car['acceleration']
+        self.handling = None
+        self.color = car['colour']
+        self.horse_power = None
+        self.speed = 0 
+         """
 class Car:
     def __init__(self, brand, model, price, top_speed, acceleration, handling, color, horse_power):
         self.brand = brand
         self.model = model
-        self.price = price 
+        self.price = price
         self.top_speed = top_speed
         self.acceleration = acceleration
         self.handling = handling 
