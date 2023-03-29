@@ -1,3 +1,4 @@
+from CarShop import car_dict
 class Car:
     def __init__(self, brand, model, price, top_speed, acceleration, handling, color, horse_power):
         self.brand = brand
@@ -14,7 +15,7 @@ class Car:
         print(f"{self.brand} {self.model}".center(50, '='))
         print("Stats:")
         print(f'\tPower:        {self.horse_power}hp')
-        print(f'\tTop speed:    {self.top_speed}km/h')
+        print(f'\tTop speed:    {self.top_speed} km/h')
         print(f'\t0-100km/h:    {self.acceleration}s')
         print(f'\tHandling:     {self.handling}')
         print(f'\tColor:        {self.color}')
@@ -73,3 +74,4 @@ car.speed_down(10)
 car.stop()
 car.tuning(['engine', 'suspension', 'Yellow'])
 car.get_info()
+
