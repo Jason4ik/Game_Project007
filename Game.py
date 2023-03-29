@@ -3,6 +3,9 @@ import time
 # from CarShop import CarShop
 # from Car import Car
 # from CarRace import CarRace
+import pygame
+from art import *
+from tqdm import trange
 
 
 class Driver:
@@ -49,11 +52,16 @@ class Driver:
 class Game:
     _instance = None
     def __init__(self):
+        self.loading()
         self.drivers = []
         self.play_music()
-        print('WELCOME TO NEED FOR SLEEP'.center(50, "="))
+        system('clear')
+        print(text2art('''WELCOME TO
+NEED 
+FOR SLEEP'''))
         print()
         print("Seems, like you new here, bro, you have to create your own driver.")
+        input("Press Enter to proceed...")
         self.driver_creation()
 
 
@@ -66,22 +74,33 @@ class Game:
         gloves = input('Choose the gloves of a driver[black leather/red leather/rose leather]: ')
         shoes = input("Choose the shoes of a driver[sneakers/black boots]: ")
         self.drivers.append(Driver(name, gender, age, glasses, gloves, shoes))
+        print("Driver successfully created!")
 
     def menu(self):
         system('clear')
         print('Choose an action'.center(50, ' '))
         choice = input("""[1] - New game""")
-        # while 
+        while True:
+            pass
 
-        
-
+    def loading(self):
+        system('clear')
+        print(text2art("Loading"))
+        for char in trange(100):
+            time.sleep(0.01)
 
     def start_game(self):
         pass
 
     def play_music(self):
-        # while True:
+        pygame.init()
+        pygame.mixer.music.load('./Riders-on-the-Storm.mp3')
+        pygame.mixer.music.set_volume(0.15)
+        pygame.mixer.music.play()
+
+    def enter_the_garage(self):
         pass
+
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
