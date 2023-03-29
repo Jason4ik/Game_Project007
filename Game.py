@@ -49,15 +49,19 @@ class Game:
     _instance = None
     def __init__(self):
         self.drivers = []
+        print('WELCOME TO NEED FOR SLEEP'.center(50, "="))
+        print("Seems, like you new here, bro, you have to create your own driver.")
 
-    def menu(self):
+    def driver_creation(self):
         pass
     
+    def menu(self):
+        pass
+
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
 
 if __name__ == "__main__":
-    my_driver = Driver('Georg', 22, "Black", "Leather", 'Sneakers')
-    my_driver.check_stats()
+    game = Game()
