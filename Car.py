@@ -1,5 +1,5 @@
 from CarShop import car_dict
-         
+import random 
 """class Car:
     def __init__(self, brand, model, price, top_speed, acceleration, handling, color, horse_power):
         self.brand = brand
@@ -19,9 +19,9 @@ class Car:
         self.price = car['Price']
         self.top_speed = car['top_speed']
         self.acceleration = car['acceleration']
-        self.handling = None
+        self.handling = random.randrange(1, 10)
         self.color = car['colour']
-        self.horse_power = None
+        self.horse_power = car[]
         self.speed = 0 
 
     def get_info(self):
