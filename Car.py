@@ -1,16 +1,6 @@
 from CarShop import car_dict
 import random 
-"""class Car:
-    def __init__(self, brand, model, price, top_speed, acceleration, handling, color, horse_power):
-        self.brand = brand
-        self.model = model
-        self.price = price
-        self.top_speed = top_speed
-        self.acceleration = acceleration
-        self.handling = handling 
-        self.color = color
-        self.horse_power = horse_power 
-        self.speed = 0  """
+
 class Car:
     def __init__(self, car_name):
         car = car_dict[car_name]
