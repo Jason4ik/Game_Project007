@@ -1,6 +1,6 @@
 from os import system
 import time
-from Car import Car
+#from Car import Car
 
 car_dict = {
     "Aston Martin": {"make": "Aston Martin", "model": "DB9", "top_speed": 300, "acceleration": 9, "colour": "silver", "Price": 90000},
