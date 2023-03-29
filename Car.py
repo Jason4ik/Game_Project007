@@ -19,7 +19,7 @@ class Car:
         self.price = car['Price']
         self.top_speed = car['top_speed']
         self.acceleration = car['acceleration']
-        self.handling = random.randrange(1, 10)
+        self.handling = round(random.randrange(1, 10), 1)
         self.color = car['colour']
         self.horse_power = car['Power']
         self.speed = 0 
@@ -87,4 +87,6 @@ car.speed_down(10)
 car.stop()
 car.tuning(['engine', 'suspension', 'Yellow'])
 car.get_info()
+
+
 
