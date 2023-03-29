@@ -44,9 +44,9 @@ class CarShop:
 
 
 
-my_shop = CarShop()
+# my_shop = CarShop()
 
-my_shop.car_buy("Aston Martin", "DB9")
-my_shop.car_buy("Ford Mustang", "GT")
-my_shop.car_sell("Aston Martin")
-my_shop.car_sell("Chevy Camaro")
+# my_shop.car_buy("Aston Martin", "DB9")
+# my_shop.car_buy("Ford Mustang", "GT")
+# my_shop.car_sell("Aston Martin")
+# my_shop.car_sell("Chevy Camaro")

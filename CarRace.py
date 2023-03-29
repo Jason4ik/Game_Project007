@@ -1,5 +1,6 @@
 import random
 from CarShop import car_dict
+
 maps = {
     "Florida": {"length": 20.55, "difficullty": "easy"},
     "Nürnburgring": {"length": 20.88, "difficulty": "medium"},
@@ -33,8 +34,8 @@ class CarRace:
         
 
 
-my_game = CarRace()
-my_game.Start_Game()
+# my_game = CarRace()
+# my_game.Start_Game()
 
 
                 

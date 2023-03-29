@@ -2,6 +2,8 @@ from os import system
 import time
 from CarShop import CarShop
 # from Car import Car
+from CarRace import CarRace
+from playsound import playsound
 
 class Driver:
     def __init__(self, name: str, age: int, glasses: str, gloves: str, shoes: str):
@@ -10,7 +12,7 @@ class Driver:
         self.glasses = glasses
         self.gloves = gloves
         self.shoes = shoes
-        self.__level = 0
+        self.__levpassel = 0
         self.__xp = 0
         self.__money = 50000
     
@@ -42,21 +44,27 @@ class Driver:
         print(f'\tGlasses:    {self.glasses}')
         print(f'\tGloves:     {self.gloves}')
         print(f'\tShoes:      {self.shoes}')
-class Race:
-    pass
 
 class Game:
     _instance = None
     def __init__(self):
         self.drivers = []
+        self.play_music()
         print('WELCOME TO NEED FOR SLEEP'.center(50, "="))
         print("Seems, like you new here, bro, you have to create your own driver.")
 
     def driver_creation(self):
         pass
-    
+
     def menu(self):
         pass
+
+    def start_game(self):
+        pass
+
+    def play_music(self):
+        # while True:
+        playsound('./Riders-on-the-Storm.mp3', block=False)
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
