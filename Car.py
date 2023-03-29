@@ -21,7 +21,7 @@ class Car:
         self.acceleration = car['acceleration']
         self.handling = random.randrange(1, 10)
         self.color = car['colour']
-        self.horse_power = car[]
+        self.horse_power = car['Power']
         self.speed = 0 
 
     def get_info(self):
@@ -79,7 +79,7 @@ class Car:
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car("Aston Martin")
+car = Car("Aston Martin DB9")
 car.get_info()
 car.start()
 car.speed_up(50)
