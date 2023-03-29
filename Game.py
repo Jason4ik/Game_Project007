@@ -3,8 +3,7 @@ import time
 # from CarShop import CarShop
 # from Car import Car
 # from CarRace import CarRace
-from playsound import playsound
-from audioplayer import AudioPlayer
+
 
 class Driver:
     def __init__(self, name: str, gender:str, age: int, glasses: str, gloves: str, shoes: str):
@@ -55,6 +54,7 @@ class Game:
         print('WELCOME TO NEED FOR SLEEP'.center(50, "="))
         print()
         print("Seems, like you new here, bro, you have to create your own driver.")
+        self.driver_creation()
 
 
     def driver_creation(self):
@@ -81,7 +81,7 @@ class Game:
 
     def play_music(self):
         # while True:
-        AudioPlayer('./Riders-on-the-Storm.mp3').play(block=False)
+        pass
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
