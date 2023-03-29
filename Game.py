@@ -6,12 +6,13 @@ from CarRace import CarRace
 from playsound import playsound
 
 class Driver:
-    def __init__(self, name: str, age: int, glasses: str, gloves: str, shoes: str):
+    def __init__(self, name: str, gender:str, age: int, glasses: str, gloves: str, shoes: str):
         self.name = name
         self.age = age
         self.glasses = glasses
         self.gloves = gloves
         self.shoes = shoes
+        self.gender = gender
         self.__levpassel = 0
         self.__xp = 0
         self.__money = 50000
@@ -51,10 +52,17 @@ class Game:
         self.drivers = []
         self.play_music()
         print('WELCOME TO NEED FOR SLEEP'.center(50, "="))
+        print()
         print("Seems, like you new here, bro, you have to create your own driver.")
 
+
     def driver_creation(self):
-        pass
+        system('clear')
+        name = input('Insert the name of your driver: ')
+        age = int(input("Insert age of your driver: "))
+        glasses = input('Choose the glasses of a driver[black/transparent]: ')
+        gloves = input('Choose the gloves of a driver[black leather/red leather/rose leather]: ')
+        shoes = input("Choose the shoes of a driver[sneakers/black boots/]")
 
     def menu(self):
         pass
