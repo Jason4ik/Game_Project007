@@ -1,9 +1,10 @@
 from os import system
 import time
-from CarShop import CarShop
+# from CarShop import CarShop
 # from Car import Car
-from CarRace import CarRace
+# from CarRace import CarRace
 from playsound import playsound
+from audioplayer import AudioPlayer
 
 class Driver:
     def __init__(self, name: str, gender:str, age: int, glasses: str, gloves: str, shoes: str):
@@ -59,20 +60,28 @@ class Game:
     def driver_creation(self):
         system('clear')
         name = input('Insert the name of your driver: ')
+        gender = input('Choose the gender of your driver: ')
         age = int(input("Insert age of your driver: "))
         glasses = input('Choose the glasses of a driver[black/transparent]: ')
         gloves = input('Choose the gloves of a driver[black leather/red leather/rose leather]: ')
-        shoes = input("Choose the shoes of a driver[sneakers/black boots/]")
+        shoes = input("Choose the shoes of a driver[sneakers/black boots]: ")
+        self.drivers.append(Driver(name, gender, age, glasses, gloves, shoes))
 
     def menu(self):
-        pass
+        system('clear')
+        print('Choose an action'.center(50, ' '))
+        choice = input("""[1] - New game""")
+        # while 
+
+        
+
 
     def start_game(self):
         pass
 
     def play_music(self):
         # while True:
-        playsound('./Riders-on-the-Storm.mp3', block=False)
+        AudioPlayer('./Riders-on-the-Storm.mp3').play(block=False)
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
