@@ -1,17 +1,6 @@
-""" class Car:
-    def __init__(self, car_name):
-        car = car_dict[car_name]
-        self.brand = car['make']
-        self.model = car['model']
-        self.price = car['Price']
-        self.top_speed = car['top_speed']
-        self.acceleration = car['acceleration']
-        self.handling = None
-        self.color = car['colour']
-        self.horse_power = None
-        self.speed = 0 
-         """
-class Car:
+from CarShop import car_dict
+import random 
+"""class Car:
     def __init__(self, brand, model, price, top_speed, acceleration, handling, color, horse_power):
         self.brand = brand
         self.model = model
@@ -21,13 +10,25 @@ class Car:
         self.handling = handling 
         self.color = color
         self.horse_power = horse_power 
-        self.speed = 0  
+        self.speed = 0  """
+class Car:
+    def __init__(self, car_name):
+        car = car_dict[car_name]
+        self.brand = car['make']
+        self.model = car['model']
+        self.price = car['Price']
+        self.top_speed = car['top_speed']
+        self.acceleration = car['acceleration']
+        self.handling = random.randrange(1, 10)
+        self.color = car['colour']
+        self.horse_power = car['Power']
+        self.speed = 0 
 
     def get_info(self):
         print(f"{self.brand} {self.model}".center(50, '='))
         print("Stats:")
         print(f'\tPower:        {self.horse_power}hp')
-        print(f'\tTop speed:    {self.top_speed}km/h')
+        print(f'\tTop speed:    {self.top_speed} km/h')
         print(f'\t0-100km/h:    {self.acceleration}s')
         print(f'\tHandling:     {self.handling}')
         print(f'\tColor:        {self.color}')
@@ -78,7 +79,7 @@ class Car:
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car("Mercedes-Benz", "s600", 100000, 250, 2.5, 7, "Black", 500)
+car = Car("Aston Martin DB9")
 car.get_info()
 car.start()
 car.speed_up(50)
@@ -86,3 +87,4 @@ car.speed_down(10)
 car.stop()
 car.tuning(['engine', 'suspension', 'Yellow'])
 car.get_info()
+
