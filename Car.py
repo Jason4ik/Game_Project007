@@ -68,7 +68,7 @@ class Car:
                 print("Color upgrade installed.")
             else:
                 print(f"Unknown upgrade: {upgrade}")
-                            
+
 car = Car("Aston Martin DB9")
 car.get_info()
 car.start()
