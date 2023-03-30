@@ -1,17 +1,27 @@
 from CarShop import car_dict
 import random 
-
+"""class Car:
+    def __init__(self, brand, model, price, top_speed, acceleration, handling, color, horse_power):
+        self.brand = brand
+        self.model = model
+        self.price = price
+        self.top_speed = top_speed
+        self.acceleration = acceleration
+        self.handling = handling 
+        self.color = color
+        self.horse_power = horse_power 
+        self.speed = 0  """
 class Car:
     def __init__(self, car_name):
         car = car_dict[car_name]
         self.brand = car['make']
         self.model = car['model']
-        self.price = car['Price']
+        self.price = car['price']
         self.top_speed = car['top_speed']
         self.acceleration = car['acceleration']
-        self.handling = round(random.randrange(1, 10), 1)
+        self.handling = random.randrange(1, 10)
         self.color = car['colour']
-        self.horse_power = car['Power']
+        self.horse_power = car['power']
         self.speed = 0 
 
     def get_info(self):
@@ -78,5 +88,56 @@ car.stop()
 car.tuning(['engine', 'suspension', 'Yellow'])
 car.get_info()
 
+from os import system
 
+car_dict = {
+    "Aston Martin DB9": {"make": "Aston", "model": "DB9", "top_speed": 300, "acceleration": 9, "colour": "silver", "Power": 999, "Price": 90000},
+    "Audi TT": {"make": "Audi", "model": "3.2 quattro", "top_speed": 240, "acceleration": 7, "colour": "red", "Power": 470,  "Price": 20000},
+    "Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "Power": 888,  "Price": 30000},
+    "Lexus IS300": {"make": "Lexus", "model": "IS300", "top_speed": 310, "acceleration": 10, "colour": "white", "Power": 810,  "Price": 50000},
+    "Lamborgini Gallardo": {"make": "Lamborgini", "model": "Gallardo", "top_speed": 300, "acceleration": 9, "colour": "yellow", "Power": 890, "Price": 70000},
+    "Audi A4": {"make": "Audi", "model": "A4", "top_speed": 210, "acceleration": 8, "colour": "black", "Power": 720,  "Price": 25000},
+    "BMW 3 Series": {"make": "BMW", "model": "3 Series", "top_speed": 250, "acceleration": 7, "colour": "green", "Power": 780,  "Price": 50000},
+    "Mercedes-Benz CLK500": {"make": "Mercedes-Benz", "model": "CLK500", "top_speed": 280, "acceleration": 9, "colour": "gray", "Power": 800,  "Price": 25000},
+    "Lexus ES": {"make": "Lexus", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "silver", "Power": 730,  "Price": 40000},
+    "Mazda RX-7": {"make": "Mazda", "model": "RX-70", "top_speed": 210, "acceleration": 7, "colour": "red", "Power": 740,  "Price": 45000},
+    "Pontiac GTO": {"make": "Pontiac", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "blue", "Power": 660,  "Price": 50000},
+    "Mazda 6": {"make": "Mazda", "model": "6", "top_speed": 260, "acceleration": 8, "colour": "white", "Power": 800, "Price": 35000},
+    "Toyota Supra": {"make": "Toyota", "model": "Supra", "top_speed": 200, "acceleration": 6, "colour": "yellow", "Power": 600, "Price": 20000},
+    "BMW M3 GTR": {"make": "BMW", "model": "M3 GTR", "top_speed": 230, "acceleration": 7, "colour": "gold", "Power": 730, "Price": 40000},
+    "Chevrolet Corvette": {"make": "Chevrolet", "model": "Corvete", "top_speed": 270, "acceleration": 7, "colour": "silver", "Power": 800, "Price": 40000},
+    "Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "silver", "Power": 999, "Price": 34000}
+}
 
+class CarShop:
+    def __init__(self):
+        self.garage = {}
+        self.balance = 0
+        
+    def car_buy(self, car_name, car_model):
+        if car_name in car_dict and car_dict[car_name]['model'] == car_model:
+            car = car_dict[car_name]
+            if self.balance >= car['Price']:
+                self.garage[car_name] = car
+                self.balance -= car['Price']
+                print(f"{car_name} {car_model} ({car['colour']}) has been added to the garage.")
+            else:
+                print("Insufficient balance.")
+        else:
+            print(f"{car_name} {car_model} is not available in the market.")
+    
+    def car_sell(self, car_name):
+        if car_name in self.garage:
+            car = self.garage[car_name]
+            self.balance += car['Price']
+            del self.garage[car_name]
+            print(f"{car_name} has been sold.")
+        else:
+            print(f"{car_name} is not available in the garage.")
+
+my_shop = CarShop()
+
+my_shop.car_buy("Aston Martin", "DB9")
+my_shop.car_buy("Ford Mustang", "GT")
+my_shop.car_sell("Aston Martin")
+my_shop.car_sell("Chevy Camaro")
