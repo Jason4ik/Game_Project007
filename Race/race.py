@@ -16,7 +16,7 @@ class Game:
         self.gta = pygame.font.Font("Race/pics/PricedownBl.ttf", 150)
         self.carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(self.car_width * self.scale_factor), int(self.car_width * self.scale_factor)))
         self.clock = pygame.time.Clock()
-        pygame.mixer.music.load("/home/abd/projects/classes/Game_Project007/Race/sounds/wasted.mp3")
+        pygame.mixer.music.load("Race/sounds/wasted.mp3")
         self.background_images = [
             pygame.image.load("Race/pics/road3.png"),
             pygame.image.load("Race/pics/road1.png"),
