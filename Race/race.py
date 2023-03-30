@@ -16,7 +16,10 @@ class Game:
         self.gta = pygame.font.Font("Race/pics/PricedownBl.ttf", 150)
         self.carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(self.car_width * self.scale_factor), int(self.car_width * self.scale_factor)))
         self.clock = pygame.time.Clock()
-        pygame.mixer.music.load("Race/sounds/wasted.mp3")
+        self.crashed = pygame.mixer.Sound("Race/sounds/wasted.mp3")
+        self.complete = pygame.mixer.Sound("Race/sounds/passed.mp3")
+        self.stationair = pygame.mixer.Sound("Race/sounds/stationair.mp3")
+        self.acceleration = pygame.mixer.Sound("Race/sounds/acceleration.mp3")
         self.background_images = [
             pygame.image.load("Race/pics/road3.png"),
             pygame.image.load("Race/pics/road1.png"),
@@ -34,11 +37,9 @@ class Game:
         self.myfont = pygame.font.SysFont("None", 100)
         self.small_font = pygame.font.Font("Race/pics/PricedownBl.ttf", 25)
         self.small_font_r = pygame.font.Font("Race/pics/PricedownBl.ttf", 55)
-        
         self.render_text = self.gta.render("Wasted", 20, (0, 0, 0))
         self.level_text = self.myfont.render("Level-", 1, (0, 0, 0))
-        self.background_speed = 5
-
+        self.background_speed = 10
         self.x = 340
         self.y = 320
         self.x_change = 0
@@ -48,10 +49,10 @@ class Game:
         self.bumped = False
         self.prev_background_index = 1
         self.start_time = None
-        self.background_y = 200 - self.display_height  # define background_y here
+        self.background_y = 200 - self.display_height
 
     def background(self):
-        self.background_y += self.background_speed  # use self.background_y here
+        self.background_y += self.background_speed 
         if self.background_y >= self.background_height:
             self.background_y = 0
             self.background_index = (self.background_index + 1) % len(self.background_images)
@@ -67,17 +68,18 @@ class Game:
     def score_system(self):
         font = pygame.font.SysFont(None, 25)
         time_elapsed = (pygame.time.get_ticks() - self.start_time) / 1000
-        text = font.render("Time Elapsed = {:.1f}s".format(time_elapsed), True, (0, 0, 0))
+        text = font.render("Time elapsed = {:.1f}s".format(time_elapsed), True, (0, 0, 0))
         score = font.render("Score = "+str(self.score), True, (255, 0, 0))
         self.gamedisplay.blit(text, (2, 2))
-        #self.gamedisplay.blit(score, (2, 2))
 
 
     def car(self):
         self.gamedisplay.blit(self.carimg, (self.x, self.y))
 
     def game_loop(self):
+
         while not self.bumped:
+            self.acceleration.play()
             for event in pygame.event.get():
                 self.gamedisplay.fill(self.gray)
                 self.background()
@@ -106,36 +108,50 @@ class Game:
 
             if self.x > 520 - self.car_width or self.x < 290 - self.car_width:
                 self.gamedisplay.blit(self.render_text, (120, 150))
-                #self.start_time = pygame.time.get_ticks()
-                pygame.mixer.music.play()
+                self.acceleration.stop()
+                self.crashed.play()
                 pygame.display.update()
-                time.sleep(5)
-                pygame.quit()
-                quit()
+                time.sleep(7)
+                self.main_menu()
+                #pygame.quit()
+                #quit()
 
 
             if self.background_index == len(self.background_images) - 1:
                 time_elapsed = (pygame.time.get_ticks() - self.start_time) / 1000
                 self.score = int(time_elapsed * 10)
                 self.background_speed = 0
-
-                # display score sheet
+                self.acceleration.stop()
+                if self.background_speed == 0:
+                    self.complete.play()
                 score_sheet = pygame.Surface((400, 300))
                 score_sheet.fill((255, 255, 255))
                 score_sheet_rect = score_sheet.get_rect(center=(self.display_width/2, self.display_height/2))
                 score_sheet.blit(self.small_font_r.render("RESPECT+", 1, (0, 0, 0)), (100, 20))
-                #score_sheet.blit(self.small_font.render("Final Score:", 1, (0, 0, 0)), (50, 50))
-                #score_sheet.blit(self.small_font.render(str(self.score), 1, (255, 0, 0)), (250, 50))
                 score_sheet.blit(self.small_font.render("Time:", 1, (0, 0, 0)), (50, 140))
                 score_sheet.blit(self.small_font.render("{:.2f} seconds".format(time_elapsed), 1, (255, 0, 0)), (230, 140))
                 self.gamedisplay.blit(score_sheet, score_sheet_rect)
-
-                # stop the game and wait for 10 seconds
                 pygame.display.update()
-                time.sleep(10)
-                pygame.quit()
-                quit()
-                return
+                time.sleep(7)
+                self.main_menu()
+                #pygame.quit()
+                #quit()
+
+  
+    def countdown(self):
+        count = 3
+        countdown_font = pygame.font.Font("Race/pics/PricedownBl.ttf", 200)
+        while count > 0:
+            self.gamedisplay.fill(self.gray)
+            countdown_text = countdown_font.render(str(count), True, (255, 0, 0))
+            countdown_rect = countdown_text.get_rect(center=(self.display_width/2, self.display_height/2))
+            self.gamedisplay.blit(countdown_text, countdown_rect)
+            pygame.display.update()
+            pygame.time.wait(1000) # Wait for 1 second
+            count -= 1
+        self.start_time = pygame.time.get_ticks() # Set the start time
+        self.clock.tick() # Reset the game clock
+
 
     def main_menu(self):
         menu_font = pygame.font.SysFont(None, 25)
@@ -155,11 +171,13 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.start_time = pygame.time.get_ticks()
+                        self.stationair.play()
+                        self.countdown()
+                        self.stationair.stop()
                         self.game_loop()
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         quit()
-
             self.gamedisplay.fill(self.gray)
             self.gamedisplay.blit(title, title_rect)
             self.gamedisplay.blit(start, start_rect)
