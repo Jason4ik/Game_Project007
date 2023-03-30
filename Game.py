@@ -6,7 +6,8 @@ from CarShop import CarShop
 import pygame
 from art import *
 from tqdm import trange
-
+import threading
+import json
 
 class Driver:
     def __init__(self, name: str, gender:str, age: int, glasses: str, gloves: str, shoes: str):
@@ -40,6 +41,7 @@ class Driver:
             self.__level += 1
 
     def check_stats(self):
+        system('clear')
         print(f"Driver {self.name}".center(50, '='))
         print("Stats:")
         print(f'\tAge:        {self.age}')
@@ -49,13 +51,17 @@ class Driver:
         print(f'\tGlasses:    {self.glasses}')
         print(f'\tGloves:     {self.gloves}')
         print(f'\tShoes:      {self.shoes}')
+        input("\nPress Enter to proceed...")
 
 class Game:
     _instance = None
     def __init__(self):
         self.loading()
         self.drivers = []
-        self.play_music()
+        self.songs = ['./Riders-on-the-Storm.mp3', './Skinnyman-Static-X.mp3', './Chingy - I Do.mp3', 'Christopher Lawrence - Rush Hour.mp3', './Goldfrapp - Ride A White Horse.mp3','./Need For Speed Carbon Soundtrack - Hard Drivers.mp3']
+        self.player = threading.Thread(target=self.play_music)
+        self.player.start()
+        # self.play_music()
         system('clear')
         print(text2art('''WELCOME TO
 NEED 
@@ -67,6 +73,8 @@ SLEEP'''))
         self.driver_creation()
         self.menu()
 
+    def load_savings(self):
+        pass
 
     def driver_creation(self):
         system('clear')
@@ -91,7 +99,16 @@ SLEEP'''))
 [x] -> Exit the game
 
 """)
-            
+            if choice == '1':
+                pass
+            elif choice == '2':
+                self.drivers[0].check_stats()
+            elif choice == '2':
+                pass
+            if choice != 'x':
+                pass
+            elif choice == 'x':
+                self.exit_game()
 
     def loading(self) -> None: 
         system('clear')
@@ -105,14 +122,37 @@ SLEEP'''))
         pass
 
     def play_music(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('./Riders-on-the-Storm.mp3')
+        pygame.init()
+        pygame.mixer.music.load(self.songs[0])
         pygame.mixer.music.set_volume(0.15)
         pygame.mixer.music.play()
+        pygame.time.delay(372000)
+        pygame.mixer.music.load(self.songs[1])
+        pygame.mixer.music.play()
+        pygame.time.delay(203000)
+        pygame.mixer.music.load(self.songs[2])
+        pygame.mixer.music.play()
+        pygame.time.delay(237000)
+        pygame.mixer.music.load(self.songs[3])
+        pygame.mixer.music.play()
+        pygame.time.delay(243000)
+        pygame.mixer.music.load(self.songs[4])
+        pygame.mixer.music.play()
+        pygame.time.delay(201000)
+        pygame.mixer.music.load(self.songs[5])
+        pygame.mixer.music.play()
+        pygame.time.delay(216000)
+
+
 
     def enter_the_garage(self):
         pass
-
+    
+    def exit_game(self):
+        system('clear')
+        print(text2art('Thanks for playing!'))
+        pygame.quit()
+        exit()
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
