@@ -12,6 +12,7 @@ class Game:
         pygame.display.set_caption("Need For Sleep")
         self.scale_factor = 1.2
         self.car_width = 70
+        self.gta = pygame.font.Font("Race/pics/PricedownBl.ttf", 150)
         self.carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(self.car_width * self.scale_factor), int(self.car_width * self.scale_factor)))
         self.clock = pygame.time.Clock()
 
@@ -30,8 +31,10 @@ class Game:
         self.background_index = 0
         self.background_height = self.background_images[0].get_height()
         self.myfont = pygame.font.SysFont("None", 100)
-        self.small_font = pygame.font.Font(None, 25)
-        self.render_text = self.myfont.render("Wasted", 20, (0, 0, 0))
+        self.small_font = pygame.font.Font("Race/pics/PricedownBl.ttf", 25)
+        self.small_font_r = pygame.font.Font("Race/pics/PricedownBl.ttf", 55)
+
+        self.render_text = self.gta.render("Wasted", 20, (0, 0, 0))
         self.level_text = self.myfont.render("Level-", 1, (0, 0, 0))
         self.background_speed = 5
 
@@ -101,7 +104,7 @@ class Game:
             self.clock.tick(90)
 
             if self.x > 520 - self.car_width or self.x < 290 - self.car_width:
-                self.gamedisplay.blit(self.render_text, (254, 150))
+                self.gamedisplay.blit(self.render_text, (120, 150))
                 pygame.display.update()
                 time.sleep(5)
                 pygame.quit()
@@ -118,11 +121,11 @@ class Game:
                 score_sheet = pygame.Surface((400, 300))
                 score_sheet.fill((255, 255, 255))
                 score_sheet_rect = score_sheet.get_rect(center=(self.display_width/2, self.display_height/2))
-                score_sheet.blit(self.small_font.render("RESPECT+", 1, (0, 0, 0)), (150, 20))
+                score_sheet.blit(self.small_font_r.render("RESPECT+", 1, (0, 0, 0)), (100, 20))
                 #score_sheet.blit(self.small_font.render("Final Score:", 1, (0, 0, 0)), (50, 50))
                 #score_sheet.blit(self.small_font.render(str(self.score), 1, (255, 0, 0)), (250, 50))
-                score_sheet.blit(self.small_font.render("Time:", 1, (0, 0, 0)), (50, 100))
-                score_sheet.blit(self.small_font.render("{:.2f} seconds".format(time_elapsed), 1, (255, 0, 0)), (250, 100))
+                score_sheet.blit(self.small_font.render("Time:", 1, (0, 0, 0)), (50, 140))
+                score_sheet.blit(self.small_font.render("{:.2f} seconds".format(time_elapsed), 1, (255, 0, 0)), (250, 140))
                 self.gamedisplay.blit(score_sheet, score_sheet_rect)
 
                 # stop the game and wait for 10 seconds
@@ -135,7 +138,7 @@ class Game:
     def main_menu(self):
         menu_font = pygame.font.SysFont(None, 25)
         menu_title = pygame.font.SysFont(None, 50)
-        title = menu_title.render("Welcome to 'Speed For Need' Game", True, (255, 152, 255))
+        title = menu_title.render("Welcome to 'Need For Sleep'", True, (255, 152, 255))
         start = menu_font.render("Press SPACE to start", True, (255, 255, 255))
         quit_text = menu_font.render("Press Esc to quit", True, (255, 255, 255))
         title_rect = title.get_rect(center=(self.display_width/2, self.display_height/2 - 200))
