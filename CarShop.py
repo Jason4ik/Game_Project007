@@ -43,6 +43,21 @@ class CarShop:
             return car['price']
         else:
             print(f"{car_name} is not available in the Garage.")
+        
+
+    def show_car_dict(self):
+        system('clear')
+        print('Cars for sale'.center(50, '='))
+        for car in car_dict.items():
+            print(car[0])
+            print(f'\tMake:        ', car[1]['make'])
+            print(f'\tModel:       ', car[1]['model'])
+            print(f'\tTop speed:   ', car[1]['top_speed'])
+            print(f'\tAcceleration:', car[1]['acceleration'])
+            print(f'\tColor:       ', car[1]['colour'])
+            print(f'\tPower:       ', car[1]['power'])
+            print(f'\tPrice:       ', str(car[1]['price']) + '$')
+            
 
 class Garage:
     def __init__(self, car_shop):
@@ -53,13 +68,13 @@ class Garage:
         for car_name in self.car_shop.garage:
             print(f"- {car_name}")
 
-my_car_shop = CarShop()
+# my_car_shop = CarShop()
 
-my_car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
-my_car_shop.car_buy("Ford Mustang", "GT", 80000)
+# my_car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
+# my_car_shop.car_buy("Ford Mustang", "GT", 80000)
 
-my_car_shop.car_sell("Audi TT")
+# my_car_shop.car_sell("Audi TT")
 
-my_garage = Garage(my_car_shop)
+# my_garage = Garage(my_car_shop)
 
-my_garage.show_all_cars()
+# my_garage.show_all_cars()
