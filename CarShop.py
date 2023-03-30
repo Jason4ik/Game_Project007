@@ -21,8 +21,8 @@ car_dict = {
 }
 class CarShop:
     def __init__(self):
-        self.garage = {}
-        
+        self.garage = {"Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "power": 888,  "price": 30000}}
+
     def car_buy(self, car_name, car_model, shop_money: int) -> None:
         if car_name in car_dict and car_dict[car_name]['model'] == car_model:
             car = car_dict[car_name]
@@ -47,18 +47,19 @@ class CarShop:
 class Garage:
     def __init__(self, car_shop):
         self.car_shop = car_shop
+
     def show_all_cars(self):
-        print("Available cars in the Car Shop:")
-        for car_name in car_dict:
+        print("Available cars in the Garage:")
+        for car_name in self.car_shop.garage:
             print(f"- {car_name}")
 
-car_shop = CarShop()
-my_shop = CarShop()
+my_car_shop = CarShop()
 
-my_shop.car_buy("Aston Martin DB9", "DB9", shop_money=90000)
-my_shop.car_buy("Chevrolet Corvette", "Corvette", shop_money=40000)
-my_shop.car_sell("Aston Martin DB9")
-my_shop.car_sell("Chevrolet Corvette")
-car_shop = CarShop()
-garage = Garage(car_shop)
-garage.show_all_cars()
+my_car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
+my_car_shop.car_buy("Ford Mustang", "GT", 80000)
+
+my_car_shop.car_sell("Audi TT")
+
+my_garage = Garage(my_car_shop)
+
+my_garage.show_all_cars()
