@@ -58,10 +58,9 @@ class Game:
     def __init__(self):
         self.loading()
         self.drivers = []
-        self.songs = ['./Riders-on-the-Storm.mp3', './Skinnyman-Static-X.mp3', './Chingy - I Do.mp3', 'Christopher Lawrence - Rush Hour.mp3', './Goldfrapp - Ride A White Horse.mp3','./Need For Speed Carbon Soundtrack - Hard Drivers.mp3']
-        self.player = threading.Thread(target=self.play_music)
-        self.player.start()
-        # self.play_music()
+        self.songs = ['./Music/Riders-on-the-Storm.mp3', './Music/Skinnyman-Static-X.mp3', './Music/Chingy - I Do.mp3', './Music/Christopher Lawrence - Rush Hour.mp3', './Music/Goldfrapp - Ride A White Horse.mp3','./Music/Need For Speed Carbon Soundtrack - Hard Drivers.mp3']
+        self.music_player = threading.Thread(target=self.play_music)
+        self.music_player.start()
         system('clear')
         print(text2art('''WELCOME TO
 NEED 
@@ -93,7 +92,7 @@ SLEEP'''))
         while choice != 'x':
             system('clear')
             print(text2art("Main Menu"))
-            choice = input("""[1] -> New game
+            choice = input("""[1] -> Start race
 [2] -> Check driver stats
 [3] -> Check garage
 [x] -> Exit the game
@@ -102,6 +101,7 @@ SLEEP'''))
             if choice == '1':
                 pass
             elif choice == '2':
+                self.loading()
                 self.drivers[0].check_stats()
             elif choice == '2':
                 pass
@@ -119,6 +119,7 @@ SLEEP'''))
         system('clear')
 
     def start_game(self):
+        # pygame.
         pass
 
     def play_music(self):
