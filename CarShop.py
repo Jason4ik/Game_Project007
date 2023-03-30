@@ -22,8 +22,8 @@ car_dict = {
 
 class CarShop:
     def __init__(self):
-        self.garage = {}
-        
+        self.garage = {"Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "power": 888,  "price": 30000}}
+
     def car_buy(self, car_name, car_model, shop_money: int) -> None:
         if car_name in car_dict and car_dict[car_name]['model'] == car_model:
             car = car_dict[car_name]
@@ -56,7 +56,6 @@ class Garage:
 
 my_car_shop = CarShop()
 
-<<<<<<< HEAD
 my_car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
 my_car_shop.car_buy("Ford Mustang", "GT", 80000)
 
@@ -65,19 +64,3 @@ my_car_shop.car_sell("Audi TT")
 my_garage = Garage(my_car_shop)
 
 my_garage.show_all_cars()
-=======
-
-my_shop.car_buy("Aston Martin", "DB9", shop_money=90000)
-my_shop.car_buy("Ford Mustang", "GT", shop_money=50000)
-my_shop.car_sell("Aston Martin")
-my_shop.car_sell("Chevy Camaro")
-
-my_shop.car_buy("Aston Martin DB9", "DB9", shop_money=90000)
-my_shop.car_buy("Chevrolet Corvette", "Corvette", shop_money=40000)
-my_shop.car_sell("Aston Martin DB9")
-my_shop.car_sell("Chevrolet Corvette")
-car_shop = CarShop()
-garage = Garage(car_shop)
-garage.show_all_cars()
-
->>>>>>> a5cae71c81f03d417e7d70b833ce505f146e2ee1
