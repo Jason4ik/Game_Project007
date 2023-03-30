@@ -1,24 +1,21 @@
 from CarShop import car_dict
 import random 
-from art import * 
-from termcolor2 import c
-#import time
 
 class Car:
     def __init__(self, car_name):
         car = car_dict[car_name]
         self.brand = car['make']
         self.model = car['model']
-        self.price = car['price']
+        self.price = car['Price']
         self.top_speed = car['top_speed']
         self.acceleration = car['acceleration']
-        self.handling = random.randrange(1, 10)
+        self.handling = round(random.randrange(1, 10), 1)
         self.color = car['colour']
-        self.horse_power = car['power']
+        self.horse_power = car['Power']
         self.speed = 0 
 
     def get_info(self):
-        print(c(f"{self.brand} {self.model}".center(50, '=')).blue.on_yellow)
+        print(f"{self.brand} {self.model}".center(50, '='))
         print("Stats:")
         print(f'\tPower:        {self.horse_power}hp')
         print(f'\tTop speed:    {self.top_speed} km/h')
@@ -26,7 +23,7 @@ class Car:
         print(f'\tHandling:     {self.handling}')
         print(f'\tColor:        {self.color}')
         print(f'\tPrice:        {self.price}$')
-        print(c('='*50).blue.on_yellow)
+        print('='*50)
 
     def start(self):
         print(f"The car has been started and ready for race. Wrm-Wrm...")
@@ -54,7 +51,6 @@ class Car:
         print("The car has come to a complete stop.")
 
     def tuning(self, upgrades):
-        print(c(text2art("PIMP MY RIDE Studio is online now")).yellow.blink.dark)
         print(f"Hey hey hey, it's X to the Z Xzibit, and I'm ready to show you some love by pimping your ride! Let`s PIMP your Ride man!")
         colors = ["Red","Orange","Yellow","Green","Blue","Indigo","Violet","Coral"]
         for upgrade in upgrades:
@@ -73,7 +69,7 @@ class Car:
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car("Audi TT")
+car = Car("Aston Martin DB9")
 car.get_info()
 car.start()
 car.speed_up(50)
@@ -81,5 +77,6 @@ car.speed_down(10)
 car.stop()
 car.tuning(['engine', 'suspension', 'Yellow'])
 car.get_info()
+
 
 
