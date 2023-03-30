@@ -125,7 +125,7 @@ class Game:
                 #score_sheet.blit(self.small_font.render("Final Score:", 1, (0, 0, 0)), (50, 50))
                 #score_sheet.blit(self.small_font.render(str(self.score), 1, (255, 0, 0)), (250, 50))
                 score_sheet.blit(self.small_font.render("Time:", 1, (0, 0, 0)), (50, 140))
-                score_sheet.blit(self.small_font.render("{:.2f} seconds".format(time_elapsed), 1, (255, 0, 0)), (250, 140))
+                score_sheet.blit(self.small_font.render("{:.2f} seconds".format(time_elapsed), 1, (255, 0, 0)), (230, 140))
                 self.gamedisplay.blit(score_sheet, score_sheet_rect)
 
                 # stop the game and wait for 10 seconds
@@ -152,8 +152,8 @@ class Game:
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        self.start_time = pygame.time.get_ticks()  # get start time
-                        self.game_loop()  # start the game
+                        self.start_time = pygame.time.get_ticks()
+                        self.game_loop()
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         quit()
