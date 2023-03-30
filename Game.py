@@ -40,6 +40,7 @@ class Driver:
             self.__level += 1
 
     def check_stats(self):
+        system('clear')
         print(f"Driver {self.name}".center(50, '='))
         print("Stats:")
         print(f'\tAge:        {self.age}')
@@ -49,14 +50,17 @@ class Driver:
         print(f'\tGlasses:    {self.glasses}')
         print(f'\tGloves:     {self.gloves}')
         print(f'\tShoes:      {self.shoes}')
+        input("Press Enter to proceed...")
 
 class Game:
     _instance = None
     def __init__(self):
         self.loading()
         self.drivers = []
+        self.songs = ['./Riders-on-the-Storm.mp3', './Skinnyman-Static-X.mp3', './Chingy - I Do.mp3', 'Christopher Lawrence - Rush Hour.mp3']
         self.play_music()
         system('clear')
+
         print(text2art('''WELCOME TO
 NEED 
 FOR 
@@ -91,7 +95,16 @@ SLEEP'''))
 [x] -> Exit the game
 
 """)
-            
+            if choice == '1':
+                pass
+            elif choice == '2':
+                self.drivers[0].check_stats()
+            elif choice == '2':
+                pass
+            if choice != 'x':
+                pass
+            elif choice == 'x':
+                self.exit_game()
 
     def loading(self) -> None: 
         system('clear')
@@ -105,14 +118,19 @@ SLEEP'''))
         pass
 
     def play_music(self):
-        pygame.mixer.init()
-        pygame.mixer.music.load('./Riders-on-the-Storm.mp3')
+        pygame.init()
+        pygame.mixer.music.load(self.songs[0])
         pygame.mixer.music.set_volume(0.15)
         pygame.mixer.music.play()
 
     def enter_the_garage(self):
         pass
-
+    
+    def exit_game(self):
+        system('clear')
+        print(text2art('Thanks for playing!'))
+        pygame.quit()
+        exit()
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
