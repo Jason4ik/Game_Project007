@@ -16,7 +16,7 @@ car_dict = {
     "Mazda 6": {"make": "Mazda", "model": "6", "top_speed": 260, "acceleration": 8, "colour": "white", "Power": 800, "Price": 35000},
     "Toyota Supra": {"make": "Toyota", "model": "Supra", "top_speed": 200, "acceleration": 6, "colour": "yellow", "Power": 600, "Price": 20000},
     "BMW M3 GTR": {"make": "BMW", "model": "M3 GTR", "top_speed": 230, "acceleration": 7, "colour": "gold", "Power": 730, "Price": 40000},
-    "Chevrolet Corvette": {"make": "Chevrolet", "model": "Corvete", "top_speed": 270, "acceleration": 7, "colour": "silver", "Power": 800, "Price": 40000},
+    "Chevrolet Corvette": {"make": "Chevrolet", "model": "Corvette", "top_speed": 270, "acceleration": 7, "colour": "silver", "Power": 800, "Price": 40000},
     "Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "silver", "Power": 999, "Price": 34000}
 }
 
@@ -49,7 +49,7 @@ class CarShop:
 
 my_shop = CarShop()
 
-my_shop.car_buy("Aston Martin", "DB9", shop_money=90000)
-my_shop.car_buy("Ford Mustang", "GT", shop_money=50000)
-my_shop.car_sell("Aston Martin")
-my_shop.car_sell("Chevy Camaro")
+my_shop.car_buy("Aston Martin DB9", "DB9", shop_money=90000)
+my_shop.car_buy("Chevrolet Corvette", "Corvette", shop_money=40000)
+my_shop.car_sell("Aston Martin DB9")
+my_shop.car_sell("Chevrolet Corvette")
