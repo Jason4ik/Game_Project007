@@ -1,7 +1,5 @@
 from os import system
 import time
-from Game import Driver
-#from Car import Car
 
 car_dict = {
     "Aston Martin DB9": {"make": "Aston", "model": "DB9", "top_speed": 300, "acceleration": 9, "colour": "silver", "Power": 999, "Price": 90000},
@@ -25,32 +23,33 @@ car_dict = {
 class CarShop:
     def __init__(self):
         self.garage = {}
-        self.balance = 0
         
-    def car_buy(self, car_name, car_model):
+    def car_buy(self, car_name, car_model, shop_money: int) -> None:
         if car_name in car_dict and car_dict[car_name]['model'] == car_model:
             car = car_dict[car_name]
-            if Driver.__money >= car['Price']:
+            if shop_money >= car['Price']:
                 self.garage[car_name] = car
-                Driver.__money -= car['Price']
+                shop_money -= car['Price']
                 print(f"{car_name} {car_model} ({car['colour']}) has been added to the Garage.")
             else:
                 print("Insufficient balance.")
         else:
             print(f"{car_name} {car_model} Sorry Bro... It's not in the Shop.")
     
-    def car_sell(self, car_name):
+    def car_sell(self, car_name) -> int:
         if car_name in self.garage:
             car = self.garage[car_name]
-            Driver.__money += car['Price']
             del self.garage[car_name]
             print(f"{car_name} has been sold.")
+            return car['Price']
         else:
             print(f"{car_name} is not available in the Garage.")
 
+
+
 my_shop = CarShop()
 
-my_shop.car_buy("Aston Martin", "DB9")
-my_shop.car_buy("Ford Mustang", "GT")
+my_shop.car_buy("Aston Martin", "DB9", shop_money=90000)
+my_shop.car_buy("Ford Mustang", "GT", shop_money=50000)
 my_shop.car_sell("Aston Martin")
 my_shop.car_sell("Chevy Camaro")
