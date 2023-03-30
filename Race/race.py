@@ -10,20 +10,22 @@ gamedisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption("Need For Sleep")
 scale_factor = 1.2
 car_width = 70
-carimg = pygame.transform.scale(pygame.image.load("pics/car1.png"), (int(car_width * scale_factor), int(car_width * scale_factor)))
+######################
+carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(car_width * scale_factor), int(car_width * scale_factor)))
+######################
 clock = pygame.time.Clock()
 
 background_images = [ #road-track 
-    pygame.image.load("pics/road3.png"),
-    pygame.image.load("pics/road1.png"),
-    pygame.image.load("pics/road1.png"),    
-    pygame.image.load("pics/road2.png"),    
-    pygame.image.load("pics/road1.png"),    
-    pygame.image.load("pics/road2.png"),    
-    pygame.image.load("pics/road1.png"),    
-    pygame.image.load("pics/road2.png"),    
-    pygame.image.load("pics/road1.png"),
-    pygame.image.load("pics/road3.png"),
+    pygame.image.load("Race/pics/road3.png"),
+    pygame.image.load("Race/pics/road1.png"),
+    pygame.image.load("Race/pics/road1.png"),    
+    pygame.image.load("Race/pics/road2.png"),    
+    pygame.image.load("Race/pics/road1.png"),    
+    pygame.image.load("Race/pics/road2.png"),    
+    pygame.image.load("Race/pics/road1.png"),    
+    pygame.image.load("Race/pics/road2.png"),    
+    pygame.image.load("Race/pics/road1.png"),
+    pygame.image.load("Race/pics/road3.png"),
 
     ]
 background_index = 0
@@ -31,7 +33,9 @@ background_height = background_images[0].get_height()
 myfont = pygame.font.SysFont("None", 100)
 render_text = myfont.render("CAR CRASHED", 20, (0, 0, 0))
 level_text = myfont.render("Level-", 1, (0, 0, 0))
+#############
 background_speed = 2
+#############
 
 def score_system(passed, score):
     font = pygame.font.SysFont(None, 25)
