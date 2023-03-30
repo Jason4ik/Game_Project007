@@ -105,7 +105,7 @@ SLEEP'''))
         pass
 
     def play_music(self):
-        pygame.init()
+        pygame.mixer.init()
         pygame.mixer.music.load('./Riders-on-the-Storm.mp3')
         pygame.mixer.music.set_volume(0.15)
         pygame.mixer.music.play()
