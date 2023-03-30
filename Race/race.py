@@ -1,5 +1,6 @@
 import pygame
 import time
+import pygame.mixer
 #import random
 
 class Game:
@@ -15,7 +16,7 @@ class Game:
         self.gta = pygame.font.Font("Race/pics/PricedownBl.ttf", 150)
         self.carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(self.car_width * self.scale_factor), int(self.car_width * self.scale_factor)))
         self.clock = pygame.time.Clock()
-
+        pygame.mixer.music.load("/home/abd/projects/classes/Game_Project007/Race/sounds/wasted.mp3")
         self.background_images = [
             pygame.image.load("Race/pics/road3.png"),
             pygame.image.load("Race/pics/road1.png"),
@@ -33,7 +34,7 @@ class Game:
         self.myfont = pygame.font.SysFont("None", 100)
         self.small_font = pygame.font.Font("Race/pics/PricedownBl.ttf", 25)
         self.small_font_r = pygame.font.Font("Race/pics/PricedownBl.ttf", 55)
-
+        
         self.render_text = self.gta.render("Wasted", 20, (0, 0, 0))
         self.level_text = self.myfont.render("Level-", 1, (0, 0, 0))
         self.background_speed = 5
@@ -105,12 +106,13 @@ class Game:
 
             if self.x > 520 - self.car_width or self.x < 290 - self.car_width:
                 self.gamedisplay.blit(self.render_text, (120, 150))
+                #self.start_time = pygame.time.get_ticks()
+                pygame.mixer.music.play()
                 pygame.display.update()
                 time.sleep(5)
                 pygame.quit()
                 quit()
-                self.start_time = pygame.time.get_ticks()  # reset start time
-                self.__init__()  # reset the game
+
 
             if self.background_index == len(self.background_images) - 1:
                 time_elapsed = (pygame.time.get_ticks() - self.start_time) / 1000
