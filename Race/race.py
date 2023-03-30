@@ -31,9 +31,9 @@ class Game:
         self.background_height = self.background_images[0].get_height()
         self.myfont = pygame.font.SysFont("None", 100)
         self.small_font = pygame.font.Font(None, 25)
-        self.render_text = self.myfont.render("CAR CRASHED", 20, (0, 0, 0))
+        self.render_text = self.myfont.render("Wasted", 20, (0, 0, 0))
         self.level_text = self.myfont.render("Level-", 1, (0, 0, 0))
-        self.background_speed = 2
+        self.background_speed = 5
 
         self.x = 340
         self.y = 320
@@ -65,8 +65,8 @@ class Game:
         time_elapsed = (pygame.time.get_ticks() - self.start_time) / 1000
         text = font.render("Time Elapsed = {:.1f}s".format(time_elapsed), True, (0, 0, 0))
         score = font.render("Score = "+str(self.score), True, (255, 0, 0))
-        self.gamedisplay.blit(text, (2, 20))
-        self.gamedisplay.blit(score, (2, 2))
+        self.gamedisplay.blit(text, (2, 2))
+        #self.gamedisplay.blit(score, (2, 2))
 
 
     def car(self):
@@ -101,9 +101,11 @@ class Game:
             self.clock.tick(90)
 
             if self.x > 520 - self.car_width or self.x < 290 - self.car_width:
-                self.gamedisplay.blit(self.render_text, (130, 200))
+                self.gamedisplay.blit(self.render_text, (254, 150))
                 pygame.display.update()
-                time.sleep(3)
+                time.sleep(5)
+                pygame.quit()
+                quit()
                 self.start_time = pygame.time.get_ticks()  # reset start time
                 self.__init__()  # reset the game
 
@@ -116,8 +118,9 @@ class Game:
                 score_sheet = pygame.Surface((400, 300))
                 score_sheet.fill((255, 255, 255))
                 score_sheet_rect = score_sheet.get_rect(center=(self.display_width/2, self.display_height/2))
-                score_sheet.blit(self.small_font.render("Final Score:", 1, (0, 0, 0)), (50, 50))
-                score_sheet.blit(self.small_font.render(str(self.score), 1, (255, 0, 0)), (250, 50))
+                score_sheet.blit(self.small_font.render("RESPECT+", 1, (0, 0, 0)), (150, 20))
+                #score_sheet.blit(self.small_font.render("Final Score:", 1, (0, 0, 0)), (50, 50))
+                #score_sheet.blit(self.small_font.render(str(self.score), 1, (255, 0, 0)), (250, 50))
                 score_sheet.blit(self.small_font.render("Time:", 1, (0, 0, 0)), (50, 100))
                 score_sheet.blit(self.small_font.render("{:.2f} seconds".format(time_elapsed), 1, (255, 0, 0)), (250, 100))
                 self.gamedisplay.blit(score_sheet, score_sheet_rect)
