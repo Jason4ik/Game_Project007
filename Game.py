@@ -61,7 +61,6 @@ class Game:
         self.songs = ['./Riders-on-the-Storm.mp3', './Skinnyman-Static-X.mp3', './Chingy - I Do.mp3', 'Christopher Lawrence - Rush Hour.mp3', './Goldfrapp - Ride A White Horse.mp3','./Need For Speed Carbon Soundtrack - Hard Drivers.mp3']
         self.player = threading.Thread(target=self.play_music)
         self.player.start()
-        # self.play_music()
         system('clear')
         print(text2art('''WELCOME TO
 NEED 
@@ -102,6 +101,7 @@ SLEEP'''))
             if choice == '1':
                 pass
             elif choice == '2':
+                self.loading()
                 self.drivers[0].check_stats()
             elif choice == '2':
                 pass
