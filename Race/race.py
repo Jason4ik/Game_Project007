@@ -11,7 +11,7 @@ pygame.display.set_caption("Need For Sleep")
 scale_factor = 1.2
 car_width = 70
 ######################
-carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(car_width * scale_factor), int(car_width * scale_factor)))
+carimg = pygame.transform.scale(pygame.image.load("Race/pics/blue1.png"), (int(car_width * scale_factor), int(car_width * scale_factor)))
 ######################
 clock = pygame.time.Clock()
 
@@ -102,7 +102,7 @@ def game_loop():
         car(x, y)
         score_system(passed, score)
         pygame.display.update()
-        clock.tick(60)
+        clock.tick(90)
         if x > 520-car_width or x < 290-car_width:
             gamedisplay.blit(render_text, (130, 200))
             pygame.display.update()
@@ -115,7 +115,7 @@ def game_loop():
 def main_menu():
     menu_font = pygame.font.SysFont(None, 25)
     menu_title = pygame.font.SysFont(None, 50)
-    title = menu_title.render("Welcome to 'Speed For Need' Game", True, (255, 152, 255))
+    title = menu_title.render("Welcome to 'Need For Sleep' Game", True, (255, 152, 255))
     start = menu_font.render("Press SPACE to start", True, (255, 255, 255))
     quit = menu_font.render("Press Esc to quit", True, (255, 255, 255))
     title_rect = title.get_rect(center=(display_width/2, display_height/2 - 200))
@@ -139,7 +139,7 @@ def main_menu():
         gamedisplay.blit(start, start_rect)
         gamedisplay.blit(quit, quit_rect)
         pygame.display.update()
-        clock.tick(60)
+        clock.tick(90)
   
 main_menu()
 pygame.quit()
