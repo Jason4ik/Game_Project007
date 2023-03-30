@@ -41,12 +41,14 @@ class CarShop:
                         "purple": "\033[0;35m",
                         "cyan": "\033[0;36m",
                         "white": "\033[0;37m"
-                    }.get(car_color, "\033[0m")
-                    print(f"{color_code}{car_name} {car_model} {car['colour']} has been added to the Garage.\033[0m")
+                    }.get(car_color, "\033[0m...")
+                    print(f"{color_code}{car_name}{color_code} added to the garage!")
+                else:
+                    print("Not enough money to buy the car!")
             else:
-                print(f"{car_name} {car_model} is already in the Garage.")
+                print("Car is already in the garage!")
         else:
-            print(f"{car_name} {car_model} is not available.")
+            print("Car not found in the dictionary!")
 
     def car_sell(self, car_name) -> int:
         if car_name in self.garage:
@@ -56,6 +58,10 @@ class CarShop:
             return car['price']
         else:
             print(f"{car_name} is not available in the Garage.")
+    
+    def show_car_dict(self):
+        for car_name, car_details in self.garage.items():
+            print(f"{car_name}: {car_details}")
 
 
 class Garage:
@@ -90,3 +96,4 @@ my_car_shop.car_sell("Audi TT")
 my_garage = Garage(my_car_shop)
 
 my_garage.show_all_cars()
+
