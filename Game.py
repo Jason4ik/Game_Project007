@@ -1,6 +1,6 @@
 from os import system
 import time
-# from CarShop import CarShop
+from CarShop import CarShop
 # from Car import Car
 # from CarRace import CarRace
 import pygame
@@ -16,7 +16,8 @@ class Driver:
         self.gloves = gloves
         self.shoes = shoes
         self.gender = gender
-        self.__levpassel = 0
+        self.car_shop = CarShop()
+        self.__level = 0
         self.__xp = 0
         self.__money = 50000
     
@@ -58,7 +59,8 @@ class Game:
         system('clear')
         print(text2art('''WELCOME TO
 NEED 
-FOR SLEEP'''))
+FOR 
+SLEEP'''))
         print()
         print("Seems, like you new here, bro, you have to create your own driver.")
         input("Press Enter to proceed...")
@@ -78,10 +80,17 @@ FOR SLEEP'''))
 
     def menu(self):
         system('clear')
-        print('Choose an action'.center(50, ' '))
-        choice = input("""[1] - New game""")
-        while True:
-            pass
+        print('MAIN MENU'.center(50, ' '))
+        choice = input("""[1] - New game
+[2] - Create driver
+[3] - """)
+        while choice != 'x':
+            system('clear')
+            print('MAIN MENU'.center(50, ' '))
+            choice = input("""[1] - New game
+[2] - Create driver
+[3] - """)
+            
 
     def loading(self):
         system('clear')
