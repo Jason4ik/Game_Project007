@@ -1,5 +1,5 @@
-from os import system
-import time
+#from os import system
+#import time
 
 car_dict = {
     "Aston Martin DB9": {"make": "Aston", "model": "DB9", "top_speed": 300, "acceleration": 9, "colour": "purple", "power": 999, "price": 90000},
@@ -22,7 +22,7 @@ car_dict = {
 
 class CarShop:
     def __init__(self):
-        self.garage = {"Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "power": 888,  "price": 30000}}
+        self.garage = {"Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "purple", "power": 999, "price": 34000}}
 
     def car_buy(self, car_name, car_model, shop_money: int) -> None:
         car = car_dict.get(car_name)
@@ -41,14 +41,15 @@ class CarShop:
                         "purple": "\033[0;35m",
                         "cyan": "\033[0;36m",
                         "white": "\033[0;37m"
-                    }.get(car_color, "\033[0m...")
-                    print(f"{color_code}{car_name}{color_code} added to the garage!")
+                    }.get(car_color, "\033[0m")
+                    print(f"You have bought a {color_code}{car_name}\033[0m for {color_code}${car['price']}\033[0m.")
+                    print(f"Money left: {color_code}${shop_money}{color_code}.")
                 else:
-                    print("Not enough money to buy the car!")
+                    print("You don't have enough money to buy this car.")
             else:
-                print("Car is already in the garage!")
+                print("You already own this car.")
         else:
-            print("Car not found in the dictionary!")
+            print("Car not available in the shop.")
 
     def car_sell(self, car_name) -> int:
         if car_name in self.garage:
@@ -58,42 +59,26 @@ class CarShop:
             return car['price']
         else:
             print(f"{car_name} is not available in the Garage.")
-    
-    def show_car_dict(self):
-        for car_name, car_details in self.garage.items():
-            print(f"{car_name}: {car_details}")
-
-
-class Garage:
-    def __init__(self, car_shop):
-        self.car_shop = car_shop
 
     def show_all_cars(self):
-        print("Available cars in the Garage:", end=" ")
-        for car_name in self.car_shop.garage:
-            car_color = self.car_shop.garage[car_name]["colour"].lower()
-            color_code = {
-                "black": "\033[0;30m",
-                "red": "\033[0;31m",
-                "green": "\033[0;32m",
-                "yellow": "\033[0;33m",
-                "blue": "\033[0;34m",
-                "purple": "\033[0;35m",
-                "cyan": "\033[0;36m",
-                "white": "\033[0;37m"
-            }.get(car_color, "\033[0m")
-            print(f"{color_code}- {car_name}\033[0m", end=", ")
-        print()
+        print("List of all cars in the Shop:")
+        for car_name, car_info in car_dict.items():
+            print(f"{car_name}: ${car_info['price']}")
+    def show_cars_in_garage(self):
+        for car_name, car_info in self.garage.items():
+            print(f"{car_name}: {car_info['make']} {car_info['model']} - Top Speed: {car_info['top_speed']} km/h - Acceleration: {car_info['acceleration']} s - Colour: {car_info['colour']} - Power: {car_info['power']} hp - Price: ${car_info['price']}")
 
-my_car_shop = CarShop()
 
-my_car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
-my_car_shop.car_buy("Lamborgini Gallardo", "Gallardo", 80000)
-my_car_shop.car_buy("Lexus ES", "ES", 80000)
-my_car_shop.car_buy("BMW M3 GTR", "M3 GTR", 80000)
-my_car_shop.car_sell("Audi TT")
 
-my_garage = Garage(my_car_shop)
+car_shop = CarShop()
 
-my_garage.show_all_cars()
+car_shop.show_all_cars()
+car_shop.show_cars_in_garage()
 
+car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
+car_shop.car_buy("Lamborgini Gallardo", "Gallardo", 80000)
+car_shop.car_buy("Lexus ES", "ES", 80000)
+car_shop.car_buy("BMW M3 GTR", "M3 GTR", 80000)
+car_shop.car_sell("Audi TT")
+
+car_shop.show_cars_in_garage()
