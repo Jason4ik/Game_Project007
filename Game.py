@@ -65,6 +65,7 @@ SLEEP'''))
         print("Seems, like you new here, bro, you have to create your own driver.")
         input("Press Enter to proceed...")
         self.driver_creation()
+        self.menu()
 
 
     def driver_creation(self):
@@ -80,23 +81,25 @@ SLEEP'''))
 
     def menu(self):
         system('clear')
-        print('MAIN MENU'.center(50, ' '))
-        choice = input("""[1] - New game
-[2] - Create driver
-[3] - """)
+        choice = '1'
         while choice != 'x':
             system('clear')
-            print('MAIN MENU'.center(50, ' '))
-            choice = input("""[1] - New game
-[2] - Create driver
-[3] - """)
+            print(text2art("Main Menu"))
+            choice = input("""[1] -> New game
+[2] -> Check driver stats
+[3] -> Check garage
+[x] -> Exit the game
+
+""")
             
 
-    def loading(self):
+    def loading(self) -> None: 
         system('clear')
         print(text2art("Loading"))
         for char in trange(100):
             time.sleep(0.01)
+        time.sleep(2)
+        system('clear')
 
     def start_game(self):
         pass
