@@ -1,5 +1,6 @@
 from os import system
 import time
+from Game import Driver
 #from Car import Car
 
 car_dict = {
@@ -29,23 +30,23 @@ class CarShop:
     def car_buy(self, car_name, car_model):
         if car_name in car_dict and car_dict[car_name]['model'] == car_model:
             car = car_dict[car_name]
-            if self.balance >= car['Price']:
+            if Driver.__money >= car['Price']:
                 self.garage[car_name] = car
-                self.balance -= car['Price']
-                print(f"{car_name} {car_model} ({car['colour']}) has been added to the garage.")
+                Driver.__money -= car['Price']
+                print(f"{car_name} {car_model} ({car['colour']}) has been added to the Garage.")
             else:
                 print("Insufficient balance.")
         else:
-            print(f"{car_name} {car_model} is not available in the market.")
+            print(f"{car_name} {car_model} Sorry Bro... It's not in the Shop.")
     
     def car_sell(self, car_name):
         if car_name in self.garage:
             car = self.garage[car_name]
-            self.balance += car['Price']
+            Driver.__money += car['Price']
             del self.garage[car_name]
             print(f"{car_name} has been sold.")
         else:
-            print(f"{car_name} is not available in the garage.")
+            print(f"{car_name} is not available in the Garage.")
 
 my_shop = CarShop()
 
