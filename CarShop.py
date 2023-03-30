@@ -57,7 +57,7 @@ class Garage:
 my_car_shop = CarShop()
 
 my_car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
-my_car_shop.car_buy("Ford Mustang", "GT", 80000)
+my_car_shop.car_buy("Lamborgini Gallardo", "Gallardo", 80000)
 
 my_car_shop.car_sell("Audi TT")
 

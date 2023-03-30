@@ -4,22 +4,22 @@ from playsound import playsound
 from os import system
 
 car_dict = {
-    "Aston Martin DB9": {"make": "Aston", "model": "DB9", "top_speed": 300, "acceleration": 9, "colour": "silver", "Power": 999, "Price": 90000},
-    "Audi TT": {"make": "Audi", "model": "3.2 quattro", "top_speed": 240, "acceleration": 7, "colour": "red", "Power": 470,  "Price": 20000},
-    "Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "Power": 888,  "Price": 30000},
-    "Lexus IS300": {"make": "Lexus", "model": "IS300", "top_speed": 310, "acceleration": 10, "colour": "white", "Power": 810,  "Price": 50000},
-    "Lamborgini Gallardo": {"make": "Lamborgini", "model": "Gallardo", "top_speed": 300, "acceleration": 9, "colour": "yellow", "Power": 890, "Price": 70000},
-    "Audi A4": {"make": "Audi", "model": "A4", "top_speed": 210, "acceleration": 8, "colour": "black", "Power": 720,  "Price": 25000},
-    "BMW 3 Series": {"make": "BMW", "model": "3 Series", "top_speed": 250, "acceleration": 7, "colour": "green", "Power": 780,  "Price": 50000},
-    "Mercedes-Benz CLK500": {"make": "Mercedes-Benz", "model": "CLK500", "top_speed": 280, "acceleration": 9, "colour": "gray", "Power": 800,  "Price": 25000},
-    "Lexus ES": {"make": "Lexus", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "silver", "Power": 730,  "Price": 40000},
-    "Mazda RX-7": {"make": "Mazda", "model": "RX-70", "top_speed": 210, "acceleration": 7, "colour": "red", "Power": 740,  "Price": 45000},
-    "Pontiac GTO": {"make": "Pontiac", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "blue", "Power": 660,  "Price": 50000},
-    "Mazda 6": {"make": "Mazda", "model": "6", "top_speed": 260, "acceleration": 8, "colour": "white", "Power": 800, "Price": 35000},
-    "Toyota Supra": {"make": "Toyota", "model": "Supra", "top_speed": 200, "acceleration": 6, "colour": "yellow", "Power": 600, "Price": 20000},
-    "BMW M3 GTR": {"make": "BMW", "model": "M3 GTR", "top_speed": 230, "acceleration": 7, "colour": "gold", "Power": 730, "Price": 40000},
-    "Chevrolet Corvette": {"make": "Chevrolet", "model": "Corvette", "top_speed": 270, "acceleration": 7, "colour": "silver", "Power": 800, "Price": 40000},
-    "Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "silver", "Power": 999, "Price": 34000}
+    "Aston Martin DB9": {"make": "Aston", "model": "DB9", "top_speed": 300, "acceleration": 9, "colour": "silver", "power": 999, "price": 90000},
+    "Audi TT": {"make": "Audi", "model": "3.2 quattro", "top_speed": 240, "acceleration": 7, "colour": "red", "power": 470,  "price": 20000},
+    "Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "power": 888,  "price": 30000},
+    "Lexus IS300": {"make": "Lexus", "model": "IS300", "top_speed": 310, "acceleration": 10, "colour": "white", "power": 810,  "price": 50000},
+    "Lamborgini Gallardo": {"make": "Lamborgini", "model": "Gallardo", "top_speed": 300, "acceleration": 9, "colour": "yellow", "power": 890, "price": 70000},
+    "Audi A4": {"make": "Audi", "model": "A4", "top_speed": 210, "acceleration": 8, "colour": "black", "power": 720,  "price": 25000},
+    "BMW 3 Series": {"make": "BMW", "model": "3 Series", "top_speed": 250, "acceleration": 7, "colour": "green", "power": 780,  "price": 50000},
+    "Mercedes-Benz CLK500": {"make": "Mercedes-Benz", "model": "CLK500", "top_speed": 280, "acceleration": 9, "colour": "gray", "power": 800,  "price": 25000},
+    "Lexus ES": {"make": "Lexus", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "silver", "power": 730,  "price": 40000},
+    "Mazda RX-7": {"make": "Mazda", "model": "RX-7", "top_speed": 210, "acceleration": 7, "colour": "red", "power": 740,  "price": 45000},
+    "Pontiac GTO": {"make": "Pontiac", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "blue", "power": 660,  "price": 50000},
+    "Mazda 6": {"make": "Mazda", "model": "6", "top_speed": 260, "acceleration": 8, "colour": "white", "power": 800, "price": 35000},
+    "Toyota Supra": {"make": "Toyota", "model": "Supra", "top_speed": 200, "acceleration": 6, "colour": "yellow", "power": 600, "price": 20000},
+    "BMW M3 GTR": {"make": "BMW", "model": "M3 GTR", "top_speed": 230, "acceleration": 7, "colour": "gold", "power": 730, "price": 40000},
+    "Chevrolet Corvette": {"make": "Chevrolet", "model": "Corvette", "top_speed": 270, "acceleration": 7, "colour": "silver", "power": 800, "price": 40000},
+    "Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "silver", "power": 999, "price": 34000}
 }
 
 class Car:
@@ -27,16 +27,16 @@ class Car:
         car = car_dict[car_name]
         self.brand = car['make']
         self.model = car['model']
-        self.price = car['Price']
+        self.price = car['price']
         self.top_speed = car['top_speed']
         self.acceleration = car['acceleration']
         self.handling = random.randrange(1, 10)
         self.color = car['colour']
-        self.horse_power = car['Power']
+        self.horse_power = car['power']
         self.speed = 0 
 
     def get_info(self):
-        print(f"{self.brand} {self.model}".center(50, '='))
+        print(c(f"{self.brand} {self.model}".center(50, '=')).blue.on_yellow)
         print("Stats:")
         print(f'\tPower:        {self.horse_power}hp')
         print(f'\tTop speed:    {self.top_speed} km/h')
@@ -44,7 +44,7 @@ class Car:
         print(f'\tHandling:     {self.handling}')
         print(f'\tColor:        {self.color}')
         print(f'\tPrice:        {self.price}$')
-        print('='*50)
+        print(c('='*50).blue.on_yellow)
 
     def start(self):
         print(f"The car has been started and ready for race. Wrm-Wrm...")
@@ -72,6 +72,7 @@ class Car:
         print("The car has come to a complete stop.")
 
     def tuning(self, upgrades):
+        print(c(text2art("PIMP MY RIDE Studio is online now")).yellow.blink.dark)
         print(f"Hey hey hey, it's X to the Z Xzibit, and I'm ready to show you some love by pimping your ride! Let`s PIMP your Ride man!")
         colors = ["Red","Orange","Yellow","Green","Blue","Indigo","Violet","Coral"]
         for upgrade in upgrades:
@@ -90,7 +91,7 @@ class Car:
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car("Aston Martin DB9")
+car = Car("Audi TT")
 car.get_info()
 car.start()
 car.speed_up(50)
@@ -99,16 +100,35 @@ car.stop()
 car.tuning(['engine', 'suspension', 'Yellow'])
 car.get_info()
 
+car_dict = {
+    "Aston Martin DB9": {"make": "Aston Martin", "model": "DB9", "top_speed": 300, "acceleration": 9, "colour": "silver", "power": 999, "price": 90000},
+    "Audi TT": {"make": "Audi", "model": "3.2 quattro", "top_speed": 240, "acceleration": 7, "colour": "red", "power": 470,  "price": 20000},
+    "Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "power": 888,  "price": 30000},
+    "Lexus IS300": {"make": "Lexus", "model": "IS300", "top_speed": 310, "acceleration": 10, "colour": "white", "power": 810,  "price": 50000},
+    "Lamborgini Gallardo": {"make": "Lamborgini", "model": "Gallardo", "top_speed": 300, "acceleration": 9, "colour": "yellow", "power": 890, "price": 70000},
+    "Audi A4": {"make": "Audi", "model": "A4", "top_speed": 210, "acceleration": 8, "colour": "black", "power": 720,  "price": 25000},
+    "BMW 3 Series": {"make": "BMW", "model": "3 Series", "top_speed": 250, "acceleration": 7, "colour": "green", "power": 780,  "price": 50000},
+    "Mercedes-Benz CLK500": {"make": "Mercedes-Benz", "model": "CLK500", "top_speed": 280, "acceleration": 9, "colour": "gray", "power": 800,  "price": 25000},
+    "Lexus ES": {"make": "Lexus", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "silver", "power": 730,  "price": 40000},
+    "Mazda RX-7": {"make": "Mazda", "model": "RX-70", "top_speed": 210, "acceleration": 7, "colour": "red", "power": 740,  "price": 45000},
+    "Pontiac GTO": {"make": "Pontiac", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "blue", "power": 660,  "price": 50000},
+    "Mazda 6": {"make": "Mazda", "model": "6", "top_speed": 260, "acceleration": 8, "colour": "white", "power": 800, "price": 35000},
+    "Toyota Supra": {"make": "Toyota", "model": "Supra", "top_speed": 200, "acceleration": 6, "colour": "yellow", "power": 600, "price": 20000},
+    "BMW M3 GTR": {"make": "BMW", "model": "M3 GTR", "top_speed": 230, "acceleration": 7, "colour": "gold", "power": 730, "price": 40000},
+    "Chevrolet Corvette": {"make": "Chevrolet", "model": "Corvete", "top_speed": 270, "acceleration": 7, "colour": "silver", "power": 800, "price": 40000},
+    "Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "silver", "power": 999, "price": 34000}
+}
+
 class CarShop:
     def __init__(self):
-        self.garage = {}
-        
+        self.garage = {"Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "power": 888,  "price": 30000}}
+
     def car_buy(self, car_name, car_model, shop_money: int) -> None:
         if car_name in car_dict and car_dict[car_name]['model'] == car_model:
             car = car_dict[car_name]
-            if shop_money >= car['Price']:
+            if shop_money >= car['price']:
                 self.garage[car_name] = car
-                shop_money -= car['Price']
+                shop_money -= car['price']
                 print(f"{car_name} {car_model} ({car['colour']}) has been added to the Garage.")
             else:
                 print("Insufficient balance.")
@@ -120,18 +140,29 @@ class CarShop:
             car = self.garage[car_name]
             del self.garage[car_name]
             print(f"{car_name} has been sold.")
-            return car['Price']
+            return car['price']
         else:
             print(f"{car_name} is not available in the Garage.")
 
+class Garage:
+    def __init__(self, car_shop):
+        self.car_shop = car_shop
 
+    def show_all_cars(self):
+        print("Available cars in the Garage:")
+        for car_name in self.car_shop.garage:
+            print(f"- {car_name}")
 
-my_shop = CarShop()
+my_car_shop = CarShop()
 
-my_shop.car_buy("Aston Martin DB9", "DB9", shop_money=90000)
-my_shop.car_buy("Chevrolet Corvette", "Corvette", shop_money=40000)
-my_shop.car_sell("Aston Martin DB9")
-my_shop.car_sell("Chevrolet Corvette")
+my_car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
+my_car_shop.car_buy("Lamborgini Gallardo", "Gallardo", 80000)
+
+my_car_shop.car_sell("Audi TT")
+
+my_garage = Garage(my_car_shop)
+
+my_garage.show_all_cars()
 
 class Driver:
     def __init__(self, name: str, gender: str, age: int, glasses: str, gloves: str, shoes: str):
@@ -174,3 +205,4 @@ class Driver:
         print(f'\tGlasses:    {self.glasses}')
         print(f'\tGloves:     {self.gloves}')
         print(f'\tShoes:      {self.shoes}')
+
