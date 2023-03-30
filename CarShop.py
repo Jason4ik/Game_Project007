@@ -27,9 +27,9 @@ class CarShop:
     def car_buy(self, car_name, car_model, shop_money: int) -> None:
         if car_name in car_dict and car_dict[car_name]['model'] == car_model:
             car = car_dict[car_name]
-            if shop_money >= car['Price']:
+            if shop_money >= car['price']:
                 self.garage[car_name] = car
-                shop_money -= car['Price']
+                shop_money -= car['price']
                 print(f"{car_name} {car_model} ({car['colour']}) has been added to the Garage.")
             else:
                 print("Insufficient balance.")
@@ -41,15 +41,32 @@ class CarShop:
             car = self.garage[car_name]
             del self.garage[car_name]
             print(f"{car_name} has been sold.")
-            return car['Price']
+            return car['price']
         else:
             print(f"{car_name} is not available in the Garage.")
 
+class Garage:
+    def __init__(self, car_shop):
+        self.car_shop = car_shop
+    def show_all_cars(self):
+        print("Available cars in the Car Shop:")
+        for car_name in car_dict:
+            print(f"- {car_name}")
 
-
+car_shop = CarShop()
 my_shop = CarShop()
+
 
 my_shop.car_buy("Aston Martin", "DB9", shop_money=90000)
 my_shop.car_buy("Ford Mustang", "GT", shop_money=50000)
 my_shop.car_sell("Aston Martin")
 my_shop.car_sell("Chevy Camaro")
+
+my_shop.car_buy("Aston Martin DB9", "DB9", shop_money=90000)
+my_shop.car_buy("Chevrolet Corvette", "Corvette", shop_money=40000)
+my_shop.car_sell("Aston Martin DB9")
+my_shop.car_sell("Chevrolet Corvette")
+car_shop = CarShop()
+garage = Garage(car_shop)
+garage.show_all_cars()
+
