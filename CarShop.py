@@ -16,7 +16,6 @@ car_dict = {
     "Pontiac GTO": {"make": "Pontiac", "model": "ES", "top_speed": 210, "acceleration": 7, "colour": "blue"},
     "Mazda6": {"make": "Mazda", "model": "6", "top_speed": 260, "acceleration": 8, "colour": "white"}
 }
-
 class CarShop:
     def __init__(self):
         self.garage = {}

@@ -1,29 +1,62 @@
 import random
+import time
 from CarShop import car_dict
 maps = {
     "Florida": {"length": 20.55, "difficullty": "easy"},
     "Nürnburgring": {"length": 20.88, "difficulty": "medium"},
     "Monaco": {"lenght": 31.63, "difficulty": "hard"}
 }
-enemys = random.randint(1,len(car_dict))
+car_dict1 = list(car_dict)
+easy = []
+medium = []
+hard = []
 
 class CarRace:
     def __init__(self):
-        self.game = self
+        self = self
+
+    
+
+    def enemies(self,enemies):
+        self.enemies = enemies
+        enemies = random.choice(car_dict.keys())
+        return enemies
     
 
     def Start_Game(self):
-        print(f'Choose your game:"{maps}')
+        print(f'Choose your game:"{list(maps)}')
+        print("                        1            2           3")
         choice = input("")
-        if choice == "Florida".lower() or "Florida".upper():
+        if choice == "1":
             print(f'Lets drive in Florida{maps["Florida"]}')
-        elif choice == "Nürnburgring".lower() or "Nürnburgring".upper():
+            easy.append(random.choice(car_dict1))
+            print(f'Your enemie will be {easy}')
+            #choice = input(f'Choose your car:{CarShop(self.garage)}')
+            
+        elif choice == "2":
             print(f'Lets drive in Nürnburgring{maps["Nürnburgring"]}')
-        elif choice == "Monaco".lower() or "Monaco".upper():
+            for i in range(2):
+                medium.append(random.choice(car_dict1))
+            print(f'Your enemies will be{medium} ')
+
+        elif choice == "3":
             print(f'Lets drive in Monaco{maps["Monaco"]}')
+            for i in range(3):
+                hard.append(random.choices(car_dict1))
+            print(f'Your enemies will be {hard}')
         else:
             print("Wrong input my friend")
-
+        for i in range(1,4):
+            time.sleep(1)
+            print(i)
+            if i == 3:
+                time.sleep(1)
+                print("GO!")
+        print("Oh NO! Your enemy is far ahead you need to accelerate...")
+        time.sleep(0.5)
+        print("Press W to accelerate")
+        
+    
     
 
 
@@ -34,9 +67,5 @@ class CarRace:
 
 
 my_game = CarRace()
+
 my_game.Start_Game()
-
-
-                
-
-            
