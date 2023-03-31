@@ -163,7 +163,8 @@ SLEEP'''))
             
 [1] - Buy the car
 [2] - Sell the car
-[3] - Back to menu
+[3] - Show my cars
+[4] - Back to menu
 
 ''')
             if choice == '1':
