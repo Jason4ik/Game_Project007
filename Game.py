@@ -1,6 +1,6 @@
 from os import system
 import time
-from CarShop import CarShop, Garage
+from CarShop import CarShop
 # from Car import Car
 # from CarRace import CarRace
 import pygame
