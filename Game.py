@@ -126,10 +126,12 @@ SLEEP'''))
     def start_game(self):
         self.race = CarRace()
         self.race.Start_Game()
-        self.race.choose_car()
+        print('Choose the car to race: ')
+        self.driver.car_shop.garage_list()
+        
         self.race.go()
         pygame.mixer.quit()
-        # pygame.quit()
+
         result = self.race.exp()
         self.music_player = threading.Thread(target=self.play_music)
         self.music_player.start()

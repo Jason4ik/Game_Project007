@@ -26,11 +26,13 @@ class CarRace:
         self.win = []
 
     def __str__(self):
-        return (f'Available Cars {list(CarShop.garage_list)}')
+        return (f'Available Cars {list(CarShop.garage)}')
 
 
     def choose_car(self):       
-        return CarShop.garage_list
+        CarShop.garage_list()
+
+
 
     
 
@@ -84,8 +86,8 @@ class CarRace:
                 print("GO!")
     
 
-    def exp(self):
-        race_game = Race.race.Game()
+    def exp(self, res, accel):
+        race_game = Race.race.Game(res, accel)
         result = race_game.run()
 
         if result == 1:
