@@ -1,6 +1,6 @@
 from CarShop import car_dict
 import random 
-from art import * 
+from art import *
 from termcolor2 import c
 #import time
 
@@ -54,7 +54,7 @@ class Car:
         print("The car has come to a complete stop.")
 
     def tuning(self, upgrades):
-        print(c(text2art("PIMP MY RIDE Studio is online now")).yellow.blink.dark)
+        print(c(text2art("PIMP MY RIDE Studio is online now")).yellow.blink.dark)   
         print(f"Hey hey hey, it's X to the Z Xzibit, and I'm ready to show you some love by pimping your ride! Let`s PIMP your Ride man!")
         colors = ["Red","Orange","Yellow","Green","Blue","Indigo","Violet","Coral"]
         for upgrade in upgrades:

@@ -27,8 +27,8 @@ class Driver:
         return self.__money
     
     @money.setter
-    def money(self, earnings):
-        self.__money += earnings
+    def money(self, new_money):
+        self.__money = new_money
 
     @property
     def level(self):
@@ -169,14 +169,20 @@ SLEEP'''))
             if choice == '1':
                 system('clear')
                 self.garage.car_shop.show_car_dict()
-                input()
-                # self.garage.car_shop.car_buy()
+                name = input('Insert the name of desired car: ')
+                model = input('Insert the model of desired car: ')
+                price = self.garage.car_shop.car_buy(name, model, self.driver.money)
+                self.driver.money = self.driver.money - price
             elif choice == '2':
-                pass
+                system('clear')
+                self.garage.show_all_cars()
+                name = input('Insert name of car which you want to sell: ')
+                price = self.driver.car_shop.car_sell(name)
+                self.driver.money = self.driver.money + price
             elif choice == '3':
                 return 0
             
-            
+
     def exit_game(self):
         system('clear')
         print(text2art('Thanks for playing!'))
