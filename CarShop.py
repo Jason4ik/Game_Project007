@@ -23,17 +23,20 @@ class CarShop:
     def __init__(self):
         self.garage = {"Ford Mustang": {"make": "Ford", "model": "GT", "top_speed": 290, "acceleration": 9, "colour": "blue", "power": 888,  "price": 30000}}
 
-    def car_buy(self, car_name, car_model, shop_money: int) -> None:
+    def car_buy(self, car_name, car_model, shop_money: int) -> int:
         if car_name in car_dict and car_dict[car_name]['model'] == car_model:
             car = car_dict[car_name]
             if shop_money >= car['price']:
                 self.garage[car_name] = car
                 shop_money -= car['price']
                 print(f"{car_name} {car_model} ({car['colour']}) has been added to the Garage.")
+                return car['price']
             else:
                 print("Insufficient balance.")
+                return 0
         else:
             print(f"{car_name} {car_model} Sorry Bro... It's not in the Shop.")
+            return 0
     
     def car_sell(self, car_name) -> int:
         if car_name in self.garage:
@@ -43,6 +46,7 @@ class CarShop:
             return car['price']
         else:
             print(f"{car_name} is not available in the Garage.")
+            return 0
         
 
     def show_car_dict(self):
