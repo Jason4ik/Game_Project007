@@ -128,11 +128,11 @@ SLEEP'''))
         self.race.Start_Game()
         print('Choose the car to race: ')
         self.driver.car_shop.garage_list()
-        
+        car_name = input('Insert the name of car: ')
         self.race.go()
         pygame.mixer.quit()
 
-        result = self.race.exp()
+        result = self.race.exp(self.driver.car_shop.garage[car_name]['pic'], self.driver.car_shop.garage[car_name]["acceleration"])
         self.music_player = threading.Thread(target=self.play_music)
         self.music_player.start()
         self.driver.races += 1

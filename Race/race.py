@@ -4,7 +4,7 @@ import pygame.mixer
 #import random
 
 class Game:
-    def __init__(self,res,accel):
+    def __init__(self, res, accel):
         pygame.init()
         self.display_width = 750
         self.display_height = 600

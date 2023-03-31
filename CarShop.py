@@ -2,27 +2,27 @@
 #import time
 
 car_dict = {
-    "Aston Martin DB9":     {"make": "Aston"        , "model": "DB9"        , "top_speed": 300, "acceleration": 9   ,"pic": "Race/pics/red5"          , "colour": "purple"   , "power": 999  , "price": 90000},
-    "Audi TT 3.2 quattro":  {"make": "Audi"         , "model": "3.2 quattro", "top_speed": 240, "acceleration": 7   ,"pic": "Race/pics/red3"          , "colour": "red"      , "power": 470  , "price": 20000},
-    "Ford Mustang GT":      {"make": "Ford"         , "model": "GT"         , "top_speed": 290, "acceleration": 9   ,"pic": "Race/pics/blue1"         , "colour": "blue"     , "power": 888  , "price": 30000},
-    "Lexus IS300":          {"make": "Lexus"        , "model": "IS300"      , "top_speed": 310, "acceleration": 9   ,"pic": "Race/pics/white1"        , "colour": "white"    , "power": 810  , "price": 50000},
-    "Lamborgini Gallardo":  {"make": "Lamborgini"   , "model": "Gallardo"   , "top_speed": 300, "acceleration": 9   ,"pic": "Race/pics/yellow2"       , "colour": "yellow"   , "power": 890  , "price": 70000},
-    "Audi A4":              {"make": "Audi"         , "model": "A4"         , "top_speed": 210, "acceleration": 8   ,"pic": "Race/pics/black4"        , "colour": "black"    , "power": 720  , "price": 25000},
-    "BMW 3 Series":         {"make": "BMW"          , "model": "3 Series"   , "top_speed": 250, "acceleration": 7   ,"pic": "Race/pics/green"         , "colour": "green"    , "power": 780  , "price": 50000},
-    "Mercedes-Benz CLK500": {"make": "Mercedes-Benz", "model": "CLK500"     , "top_speed": 280, "acceleration": 9   ,"pic": "Race/pics/white2"        , "colour": "cyan"     , "power": 800  , "price": 25000},
-    "Lexus ES":             {"make": "Lexus"        , "model": "ES"         , "top_speed": 210, "acceleration": 7   ,"pic": "Race/pics/white3"        , "colour": "cyan"     , "power": 730  , "price": 40000},
-    "Mazda RX-7":           {"make": "Mazda"        , "model": "RX-7"       , "top_speed": 210, "acceleration": 7   ,"pic": "Race/pics/red4"          , "colour": "red"      , "power": 740  , "price": 45000},
-    "Pontiac GTO":          {"make": "Pontiac"      , "model": "GTO"        , "top_speed": 210, "acceleration": 7   ,"pic": "Race/pics/car1"          , "colour": "blue"     , "power": 660  , "price": 50000},
-    "Mazda 6":              {"make": "Mazda"        , "model": "6"          , "top_speed": 260, "acceleration": 8   ,"pic": "Race/pics/red6"          , "colour": "white"    , "power": 800  , "price": 35000},
-    "Toyota Supra":         {"make": "Toyota"       , "model": "Supra"      , "top_speed": 200, "acceleration": 6   ,"pic": "Race/pics/yellow3"       , "colour": "yellow"   , "power": 600  , "price": 20000},
-    "BMW M3 GTR":           {"make": "BMW"          , "model": "M3 GTR"     , "top_speed": 230, "acceleration": 7   ,"pic": "Race/pics/black2"        , "colour": "black"    , "power": 730  , "price": 40000},
-    "Chevrolet Corvette":   {"make": "Chevrolet"    , "model": "Corvette"   , "top_speed": 270, "acceleration": 7   ,"pic": "Race/pics/black3"        , "colour": "black"    , "power": 800  , "price": 40000},
-    "Lotus Elise":          {"make": "Lotus"        , "model": "Elise"      , "top_speed": 300, "acceleration": 7   ,"pic": "Race/pics/red5"          , "colour": "purple"   , "power": 999  , "price": 34000}
+    "Aston Martin DB9":     {"make": "Aston"        , "model": "DB9"        , "top_speed": 300, "acceleration": 20   ,"pic": "Race/pics/red5.png"          , "colour": "purple"   , "power": 999  , "price": 90000},
+    "Audi TT 3.2 quattro":  {"make": "Audi"         , "model": "3.2 quattro", "top_speed": 240, "acceleration": 7   ,"pic": "Race/pics/red3.png"          , "colour": "red"      , "power": 470  , "price": 20000},
+    "Ford Mustang GT":      {"make": "Ford"         , "model": "GT"         , "top_speed": 290, "acceleration": 9   ,"pic": "Race/pics/blue1.png"         , "colour": "blue"     , "power": 888  , "price": 30000},
+    "Lexus IS300":          {"make": "Lexus"        , "model": "IS300"      , "top_speed": 310, "acceleration": 9   ,"pic": "Race/pics/white1.png"        , "colour": "white"    , "power": 810  , "price": 50000},
+    "Lamborgini Gallardo":  {"make": "Lamborgini"   , "model": "Gallardo"   , "top_speed": 300, "acceleration": 9   ,"pic": "Race/pics/yellow2.png"       , "colour": "yellow"   , "power": 890  , "price": 70000},
+    "Audi A4":              {"make": "Audi"         , "model": "A4"         , "top_speed": 210, "acceleration": 10   ,"pic": "Race/pics/black4.png"        , "colour": "black"    , "power": 720  , "price": 25000},
+    "BMW 3 Series":         {"make": "BMW"          , "model": "3 Series"   , "top_speed": 250, "acceleration": 7   ,"pic": "Race/pics/green.png"         , "colour": "green"    , "power": 780  , "price": 50000},
+    "Mercedes-Benz CLK500": {"make": "Mercedes-Benz", "model": "CLK500"     , "top_speed": 280, "acceleration": 9   ,"pic": "Race/pics/white2.png"        , "colour": "cyan"     , "power": 800  , "price": 25000},
+    "Lexus ES":             {"make": "Lexus"        , "model": "ES"         , "top_speed": 210, "acceleration": 7   ,"pic": "Race/pics/white3.png"        , "colour": "cyan"     , "power": 730  , "price": 40000},
+    "Mazda RX-7":           {"make": "Mazda"        , "model": "RX-7"       , "top_speed": 210, "acceleration": 7   ,"pic": "Race/pics/red4.png"          , "colour": "red"      , "power": 740  , "price": 45000},
+    "Pontiac GTO":          {"make": "Pontiac"      , "model": "GTO"        , "top_speed": 210, "acceleration": 7   ,"pic": "Race/pics/car1.png"          , "colour": "blue"     , "power": 660  , "price": 50000},
+    "Mazda 6":              {"make": "Mazda"        , "model": "6"          , "top_speed": 260, "acceleration": 8   ,"pic": "Race/pics/red6.png"          , "colour": "white"    , "power": 800  , "price": 35000},
+    "Toyota Supra":         {"make": "Toyota"       , "model": "Supra"      , "top_speed": 200, "acceleration": 6   ,"pic": "Race/pics/yellow3.png"       , "colour": "yellow"   , "power": 600  , "price": 20000},
+    "BMW M3 GTR":           {"make": "BMW"          , "model": "M3 GTR"     , "top_speed": 230, "acceleration": 7   ,"pic": "Race/pics/black2.png"        , "colour": "black"    , "power": 730  , "price": 40000},
+    "Chevrolet Corvette":   {"make": "Chevrolet"    , "model": "Corvette"   , "top_speed": 270, "acceleration": 7   ,"pic": "Race/pics/black3.png"        , "colour": "black"    , "power": 800  , "price": 40000},
+    "Lotus Elise":          {"make": "Lotus"        , "model": "Elise"      , "top_speed": 300, "acceleration": 7   ,"pic": "Race/pics/red5.png"          , "colour": "purple"   , "power": 999  , "price": 34000}
 }
 
 class CarShop:
     def __init__(self):
-        self.garage = {"Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "purple", "power": 999, "price": 34000}}
+        self.garage = {"Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "pic": "Race/pics/red5.png", "colour": "purple", "power": 999, "price": 34000}}
         self.color_code = {
             "black": "\033[0;30m",
             "red": "\033[0;31m",
