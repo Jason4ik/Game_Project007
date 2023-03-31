@@ -15,12 +15,12 @@ class Car:
         self.handling = random.randrange(1, 10)
         self.color = car['colour']
         self.horse_power = car['power']
-        self.speed = 0 
+        self.speed = 0
 
     def get_info(self):
         print(c(f"{self.brand} {self.model}".center(50, '=')).blue.on_yellow)
         print("Stats:")
-        print(f'\tPower:        {self.horse_power}hp')
+        print(f'\tPower:        {int(self.horse_power)}hp')
         print(f'\tTop speed:    {self.top_speed} km/h')
         print(f'\t0-100km/h:    {self.acceleration}s')
         print(f'\tHandling:     {self.handling}')
@@ -73,11 +73,11 @@ class Car:
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car("Audi TT 3.2 quattro")
-car.get_info()
-car.start()
-car.speed_up(50)
-car.speed_down(10)
-car.stop()
-car.tuning(['engine', 'suspension', 'Yellow'])
-car.get_info()
+# car = Car()
+# car.get_info()
+# car.start()
+# car.speed_up(50)
+# car.speed_down(10)
+# car.stop()
+# car.tuning(['engine', 'suspension', 'Yellow'])
+# car.get_info()

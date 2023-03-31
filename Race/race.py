@@ -19,7 +19,7 @@ class Game:
         self.crashed = pygame.mixer.Sound("Race/sounds/wasted.mp3")
         self.complete = pygame.mixer.Sound("Race/sounds/passed.mp3")
         self.stationair = pygame.mixer.Sound("Race/sounds/stationair.mp3")
-        self.acceleration = pygame.mixer.Sound("Race/sounds/acceleration.mp3")
+        # self.acceleration = pygame.mixer.Sound("Race/sounds/acceleration.mp3")
         self.background_images = [
             pygame.image.load("Race/pics/road3.png"),
             pygame.image.load("Race/pics/road1.png"),
@@ -79,7 +79,7 @@ class Game:
     def game_loop(self):
 
         while not self.bumped:
-            self.acceleration.play()
+            # self.acceleration.play()
             for event in pygame.event.get():
                 self.gamedisplay.fill(self.gray)
                 self.background()
@@ -108,21 +108,21 @@ class Game:
 
             if self.x > 520 - self.car_width or self.x < 290 - self.car_width:
                 self.gamedisplay.blit(self.render_text, (120, 150))
-                self.acceleration.stop()
+                # self.acceleration.stop()
                 self.crashed.play()
                 pygame.display.update()
                 time.sleep(7)
                 # self.main_menu()
                 pygame.quit()
                 return 0
-                #quit()
+                quit()
 
 
             if self.background_index == len(self.background_images) - 1:
                 time_elapsed = (pygame.time.get_ticks() - self.start_time) / 1000
                 self.score = int(time_elapsed * 10)
                 self.background_speed = 0
-                self.acceleration.stop()
+                # self.acceleration.stop()
                 if self.background_speed == 0:
                     self.complete.play()
                 score_sheet = pygame.Surface((400, 300))
@@ -134,8 +134,9 @@ class Game:
                 self.gamedisplay.blit(score_sheet, score_sheet_rect)
                 pygame.display.update()
                 time.sleep(7)
-                self.main_menu()
-                #pygame.quit()
+                pygame.quit()
+                return 1
+                # self.main_menu()
                 #quit()
 
   
