@@ -17,6 +17,7 @@ class Driver:
         self.shoes = shoes
         self.gender = gender
         self.car_shop = CarShop()
+        self.tuned_cars = []
         self.races = 0
         self.__level = 0
         self.__xp = 0
@@ -53,7 +54,11 @@ class Driver:
         print(f'\tGlasses:    {self.glasses}')
         print(f'\tGloves:     {self.gloves}')
         print(f'\tShoes:      {self.shoes}')
-
+        print("Cars:")
+        self.car_shop.garage_list()
+        print('Tuned cars:')
+        for car in self.tuned_cars:
+            car.get_info()
 class Game:
     _instance = None
     def __init__(self):
@@ -160,8 +165,6 @@ SLEEP'''))
 
     def enter_the_garage(self):
         self.loading()
-        self.driver.car_shop.garage_list()
-        input('\nPress Enter to proceed...')
         while True:
             system('clear')
             print(text2art("Garage"))
@@ -195,8 +198,24 @@ SLEEP'''))
                 self.driver.money = self.driver.money + price
             elif choice == '3':
                 self.driver.car_shop.garage_list()
+                print('Tuned cars:')
+                for car in self.driver.tuned_cars:
+                    car.get_info()
             elif choice == '4':
-                pass
+                self.driver.car_shop.garage_list()
+                car_choice = input('Choose the car for tunning: ')
+                car = Car(car_choice)
+                self.driver.tuned_cars.append(car)
+                upgrades = ["engine", 'suspencion', 'Red']
+                print("Available upgrades:")
+                print('\t\tEngine - upgrade heart of your car')
+                print('\t\tSuspension - control your car as a God')
+                print('\t\tChange color - respray your car in one of available colors[Red/Orange/Yellow/Green/Blue/Indigo/Violet/Coral]')
+
+                upgr_choice = input('Choose your upgrades and write it with coma as a separator: ')
+                self.driver.tuned_cars[self.driver.tuned_cars.index(car)].tuning(upgr_choice.split(','))
+                print()
+                car.get_info()
             if choice == 'x':
                 return 0
             elif choice != 'x':

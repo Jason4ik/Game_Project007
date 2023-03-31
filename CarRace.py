@@ -82,10 +82,10 @@ class CarRace:
         result = race_game.run()
 
         if result == 1:
-            print("You earned 1000 xp and 10000 money")
+            print("You earned 1000 xp and 10000$")
             return 1
         elif result == 0:
-            print("You earned 100 xp and 1000 money")
+            print("You earned 100 xp and 1000$")
             return 0
     
     def faster(self):

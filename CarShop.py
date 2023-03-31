@@ -84,7 +84,7 @@ class CarShop:
             print("Cars in your garage:")
             for car in self.garage:
                 car_color = self.garage[car]["colour"].lower()
-                self.print_with_color(car_color, f"{car} - {self.garage[car]['model']} - ${self.garage[car]['price']}")
+                self.print_with_color(car_color, f"\t\t{car} - {self.garage[car]['model']} - ${self.garage[car]['price']}")
 
 
 #car_shop = CarShop()

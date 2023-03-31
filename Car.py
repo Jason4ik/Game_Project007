@@ -20,7 +20,7 @@ class Car:
     def get_info(self):
         print(c(f"{self.brand} {self.model}".center(50, '=')).blue.on_yellow)
         print("Stats:")
-        print(f'\tPower:        {self.horse_power}hp')
+        print(f'\tPower:        {int(self.horse_power)}hp')
         print(f'\tTop speed:    {self.top_speed} km/h')
         print(f'\t0-100km/h:    {self.acceleration}s')
         print(f'\tHandling:     {self.handling}')
@@ -62,6 +62,7 @@ class Car:
                 self.horse_power *= 1.1
                 self.acceleration *= 0.9
                 self.top_speed *= 1.17
+                self.price *= 1.05
                 print("Engine upgrade installed.")
             elif upgrade == 'suspension':
                 self.handling *= 1.2
