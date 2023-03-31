@@ -4,7 +4,7 @@ import pygame.mixer
 #import random
 
 class Game:
-    def __init__(self):
+    def __init__(self,res,accel):
         pygame.init()
         self.display_width = 750
         self.display_height = 600
@@ -14,7 +14,7 @@ class Game:
         self.scale_factor = 1.2
         self.car_width = 70
         self.gta = pygame.font.Font("Race/pics/PricedownBl.ttf", 150)
-        self.carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(self.car_width * self.scale_factor), int(self.car_width * self.scale_factor)))
+        self.carimg = pygame.transform.scale(pygame.image.load(res), (int(self.car_width * self.scale_factor), int(self.car_width * self.scale_factor)))
         self.clock = pygame.time.Clock()
         self.crashed = pygame.mixer.Sound("Race/sounds/wasted.mp3")
         self.complete = pygame.mixer.Sound("Race/sounds/passed.mp3")
@@ -39,7 +39,7 @@ class Game:
         self.small_font_r = pygame.font.Font("Race/pics/PricedownBl.ttf", 55)
         self.render_text = self.gta.render("Wasted", 20, (0, 0, 0))
         self.level_text = self.myfont.render("Level-", 1, (0, 0, 0))
-        self.background_speed = 10
+        self.background_speed = accel
         self.x = 340
         self.y = 320
         self.x_change = 0
