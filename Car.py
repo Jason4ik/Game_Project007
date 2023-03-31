@@ -73,11 +73,11 @@ class Car:
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car("BMW M3 GTR")
+"""car = Car("BMW M3 GTR")
 car.get_info()
 car.start()
 car.speed_up(50)
 car.speed_down(10)
 car.stop()
 car.tuning(['engine', 'suspension', 'Yellow'])
-car.get_info()
+car.get_info()"""
