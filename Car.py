@@ -62,18 +62,18 @@ class Car:
                 self.horse_power *= 1.1
                 self.acceleration *= 0.9
                 self.top_speed *= 1.17
-                print("Engine upgrade installed.")
+                print(c("Engine upgrade installed.").green)
             elif upgrade == 'suspension':
                 self.handling *= 1.2
-                print("Suspension upgrade installed.")
+                print(c("Suspension upgrade installed.").green)
             elif upgrade in colors:
                 self.color = upgrade
                 self.price *= 1.05
-                print("Color upgrade installed.")
+                print(c("Color upgrade installed.").green)
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car()
+car = Car("Audi TT 3.2 quattro")
 car.get_info()
 car.start()
 car.speed_up(50)
