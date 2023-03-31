@@ -2,7 +2,7 @@ from os import system
 import time
 from CarShop import CarShop
 # from Car import Car
-# from CarRace import CarRace
+from CarRace import CarRace
 import pygame
 from art import *
 from tqdm import trange
@@ -58,8 +58,8 @@ class Game:
         self.loading()
         self.driver = None
         self.songs = ['./Music/Riders-on-the-Storm.mp3', './Music/Skinnyman-Static-X.mp3', './Music/Chingy - I Do.mp3', './Music/Christopher Lawrence - Rush Hour.mp3', './Music/Goldfrapp - Ride A White Horse.mp3','./Music/Need For Speed Carbon Soundtrack - Hard Drivers.mp3']
-        self.music_player_event = threading.Event()
-        self.music_player = threading.Thread(target=self.play_music)
+        self.stop_event = threading.Event()
+        self.music_player = threading.Thread(target=self.play_music, args=(self.stop_event, ))
         self.music_player.start()
         system('clear')
         print(text2art('''WELCOME TO
@@ -120,30 +120,37 @@ SLEEP'''))
         system('clear')
 
     def start_game(self):
-        # self.race = CarRace()
-        pass
+        self.race = CarRace()
+        self.race.Start_Game()
+        self.race.choose_car()
+        self.race.go()
+        # self.game_thread = threading.Thread(target=self.race.exp)
+        # self.game_thread.start()
+        self.stop_event.set()
+        self.race.exp()
 
-    def play_music(self):
-        pygame.init()
-        pygame.mixer.music.load(self.songs[0])
-        pygame.mixer.music.set_volume(0.15)
-        pygame.mixer.music.play()
-        pygame.time.delay(372000)
-        pygame.mixer.music.load(self.songs[1])
-        pygame.mixer.music.play()
-        pygame.time.delay(203000)
-        pygame.mixer.music.load(self.songs[2])
-        pygame.mixer.music.play()
-        pygame.time.delay(237000)
-        pygame.mixer.music.load(self.songs[3])
-        pygame.mixer.music.play()
-        pygame.time.delay(243000)
-        pygame.mixer.music.load(self.songs[4])
-        pygame.mixer.music.play()
-        pygame.time.delay(201000)
-        pygame.mixer.music.load(self.songs[5])
-        pygame.mixer.music.play()
-        pygame.time.delay(216000)
+    def play_music(self, stop_event):
+        while not stop_event.is_set():
+            pygame.init()
+            pygame.mixer.music.load(self.songs[0])
+            pygame.mixer.music.set_volume(0.15)
+            pygame.mixer.music.play()
+            pygame.time.delay(372000)
+            pygame.mixer.music.load(self.songs[1])
+            pygame.mixer.music.play()
+            pygame.time.delay(203000)
+            pygame.mixer.music.load(self.songs[2])
+            pygame.mixer.music.play()
+            pygame.time.delay(237000)
+            pygame.mixer.music.load(self.songs[3])
+            pygame.mixer.music.play()
+            pygame.time.delay(243000)
+            pygame.mixer.music.load(self.songs[4])
+            pygame.mixer.music.play()
+            pygame.time.delay(201000)
+            pygame.mixer.music.load(self.songs[5])
+            pygame.mixer.music.play()
+            pygame.time.delay(216000)
 
 
 

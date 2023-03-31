@@ -112,8 +112,9 @@ class Game:
                 self.crashed.play()
                 pygame.display.update()
                 time.sleep(7)
-                self.main_menu()
-                #pygame.quit()
+                # self.main_menu()
+                pygame.quit()
+                return 0
                 #quit()
 
 
@@ -174,7 +175,7 @@ class Game:
                         self.stationair.play()
                         self.countdown()
                         self.stationair.stop()
-                        self.game_loop()
+                        return self.game_loop()
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         quit()
@@ -187,7 +188,7 @@ class Game:
 
     def run(self):
         pygame.init()
-        self.main_menu()
+        return self.main_menu()
         pygame.quit()
         quit()
 

@@ -2,6 +2,8 @@ import random
 import time
 from CarShop import car_dict
 from CarShop import CarShop
+import sys
+import Race.race
 
 
 maps = {
@@ -75,10 +77,14 @@ class CarRace:
     
 
     def exp(self):
-        if 1 in self.win:
-            print("You earned 1000 ep and 10000 money")
-        else :
-            print("You earned 100 ep and 1000 money")
+        race_game = Race.race.Game()
+        time.sleep(2)
+        result = race_game.run()
+
+        if result == 1:
+            print("You earned 1000 xp and 10000 money")
+        elif result == 0:
+            print("You earned 100 xp and 1000 money")
     
     def faster(self):
         if self.my_car_speed < self.enemy_car_speed:    
