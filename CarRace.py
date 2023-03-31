@@ -8,7 +8,7 @@ maps = {
     "Nürnburgring": {"length": 20.88, "difficulty": "medium"},
     "Monaco": {"lenght": 31.63, "difficulty": "hard"}
 }
-for a in CarShop.garage.keys()
+
 class CarRace:
     def __init__(self):
         self = self
