@@ -37,13 +37,15 @@ class CarRace:
     def Start_Game(self):
         for key in maps:
             self.difficulty.append(maps[key]["difficulty"])
-        print(f'''Choose your game:\n*************{list(maps)}*****************
-        \n******************{self.difficulty}*******************\n
-        ************ 1         2        3 **************''')
+        print(f'''Choose your game:\n************* {"  ".join(list(maps))} *****************
+        \n****************** {" ".join(self.difficulty)} *******************\n
+************ 1         2        3 **************''')
         
         choice = input("")
         if choice == "1":
-            print(f'Lets drive in Florida{maps["Florida"]}')
+            print(f'Lets drive in Florida')
+            print("Length:", maps['Florida']['length'])
+            print("Difficulty:", maps['Florida']['difficulty'])
             print()
             self.easy.append(random.choice(self.car_dict1))
             print(f'Your enemie will be {self.easy}')
@@ -51,7 +53,10 @@ class CarRace:
             
             
         elif choice == "2":
-            print(f'Lets drive in Nürnburgring{maps["Nürnburgring"]}')
+            print(f'Lets drive in Nürnburgring')
+            
+            print("Length:", maps['Nürnburgring']['length'])
+            print("Difficulty:", maps['Nürnburgring']['difficulty'])
             print()
             for i in range(2):
                 self.medium.append(random.choice(self.car_dict1))
@@ -59,7 +64,9 @@ class CarRace:
             
 
         elif choice == "3":
-            print(f'Lets drive in Monaco{maps["Monaco"]}')
+            print(f'Lets drive in Monaco')
+            print("Length:", maps['Monaco']['length'])
+            print("Difficulty:", maps['Monaco']['difficulty'])
             print()
             for i in range(3):
                 self.hard.append(random.choices(self.car_dict1))
