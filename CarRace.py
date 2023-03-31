@@ -144,10 +144,10 @@ class CarRace:
         
 
 
-my_game = CarRace()
+# my_game = CarRace()
 
-my_game.Start_Game()
-my_game.choose_car()
-my_game.go()
-my_game.faster()
-my_game.exp()
+# my_game.Start_Game()
+# my_game.choose_car()
+# my_game.go()
+# my_game.faster()
+# my_game.exp()

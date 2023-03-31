@@ -51,7 +51,6 @@ class Driver:
         print(f'\tGlasses:    {self.glasses}')
         print(f'\tGloves:     {self.gloves}')
         print(f'\tShoes:      {self.shoes}')
-        input("\nPress Enter to proceed...")
 
 class Game:
     _instance = None
@@ -117,10 +116,11 @@ SLEEP'''))
         print(text2art("Loading"))
         for char in trange(100):
             time.sleep(0.01)
-        time.sleep(2)
+        time.sleep(1)
         system('clear')
 
     def start_game(self):
+        # self.race = CarRace()
         pass
 
     def play_music(self):
@@ -167,7 +167,7 @@ SLEEP'''))
                 self.driver.car_shop.show_all_cars()
                 name = input('Insert the name of desired car: ')
                 model = input('Insert the model of desired car: ')
-                self.driver.car_shop.car_buy(name, model, self.driver.money)
+                price = self.driver.car_shop.car_buy(name, model, self.driver.money)
                 self.driver.money = self.driver.money - price
             elif choice == '2':
                 system('clear')
@@ -176,6 +176,10 @@ SLEEP'''))
                 price = self.driver.car_shop.car_sell(name)
                 self.driver.money = self.driver.money + price
             elif choice == '3':
+                self.driver.car_shop.garage_list()
+            if choice != '4':
+                input("Press Enter to proceed...")
+            elif choice == '4':
                 return 0
             
 
