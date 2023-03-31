@@ -1,142 +1,196 @@
 import pygame
 import time
-import random
+import pygame.mixer
+#import random
 
-pygame.init()
-display_width = 750
-display_height = 600
-gray = (119, 119, 119)
-gamedisplay = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption("Need For Sleep")
-scale_factor = 1.2
-car_width = 70
-carimg = pygame.transform.scale(pygame.image.load("pics/car1.png"), (int(car_width * scale_factor), int(car_width * scale_factor)))
-clock = pygame.time.Clock()
+class Game:
+    def __init__(self):
+        pygame.init()
+        self.display_width = 750
+        self.display_height = 600
+        self.gray = (119, 119, 119)
+        self.gamedisplay = pygame.display.set_mode((self.display_width, self.display_height))
+        pygame.display.set_caption("Need For Sleep")
+        self.scale_factor = 1.2
+        self.car_width = 70
+        self.gta = pygame.font.Font("Race/pics/PricedownBl.ttf", 150)
+        self.carimg = pygame.transform.scale(pygame.image.load("Race/pics/car1.png"), (int(self.car_width * self.scale_factor), int(self.car_width * self.scale_factor)))
+        self.clock = pygame.time.Clock()
+        self.crashed = pygame.mixer.Sound("Race/sounds/wasted.mp3")
+        self.complete = pygame.mixer.Sound("Race/sounds/passed.mp3")
+        self.stationair = pygame.mixer.Sound("Race/sounds/stationair.mp3")
+        self.acceleration = pygame.mixer.Sound("Race/sounds/acceleration.mp3")
+        self.background_images = [
+            pygame.image.load("Race/pics/road3.png"),
+            pygame.image.load("Race/pics/road1.png"),
+            pygame.image.load("Race/pics/road1.png"),    
+            pygame.image.load("Race/pics/road2.png"),    
+            pygame.image.load("Race/pics/road1.png"),    
+            pygame.image.load("Race/pics/road2.png"),    
+            pygame.image.load("Race/pics/road1.png"),    
+            pygame.image.load("Race/pics/road2.png"),    
+            pygame.image.load("Race/pics/road1.png"),
+            pygame.image.load("Race/pics/road3.png"),
+        ]
+        self.background_index = 0
+        self.background_height = self.background_images[0].get_height()
+        self.myfont = pygame.font.SysFont("None", 100)
+        self.small_font = pygame.font.Font("Race/pics/PricedownBl.ttf", 25)
+        self.small_font_r = pygame.font.Font("Race/pics/PricedownBl.ttf", 55)
+        self.render_text = self.gta.render("Wasted", 20, (0, 0, 0))
+        self.level_text = self.myfont.render("Level-", 1, (0, 0, 0))
+        self.background_speed = 10
+        self.x = 340
+        self.y = 320
+        self.x_change = 0
+        self.passed = 0
+        self.level = 0
+        self.score = 0
+        self.bumped = False
+        self.prev_background_index = 1
+        self.start_time = None
+        self.background_y = 200 - self.display_height
 
-background_images = [ #road-track 
-    pygame.image.load("pics/road3.png"),
-    pygame.image.load("pics/road1.png"),
-    pygame.image.load("pics/road1.png"),    
-    pygame.image.load("pics/road2.png"),    
-    pygame.image.load("pics/road1.png"),    
-    pygame.image.load("pics/road2.png"),    
-    pygame.image.load("pics/road1.png"),    
-    pygame.image.load("pics/road2.png"),    
-    pygame.image.load("pics/road1.png"),
-    pygame.image.load("pics/road3.png"),
-
-    ]
-background_index = 0
-background_height = background_images[0].get_height()
-myfont = pygame.font.SysFont("None", 100)
-render_text = myfont.render("CAR CRASHED", 20, (0, 0, 0))
-level_text = myfont.render("Level-", 1, (0, 0, 0))
-background_speed = 2
-
-def score_system(passed, score):
-    font = pygame.font.SysFont(None, 25)
-    text = font.render("Passed = "+str(passed), True, (0, 0, 0))
-    score = font.render("Score = "+str(score), True, (255, 0, 0))
-    gamedisplay.blit(text, (2, 20))
-    gamedisplay.blit(score, (2, 2))
+    def background(self):
+        self.background_y += self.background_speed 
+        if self.background_y >= self.background_height:
+            self.background_y = 0
+            self.background_index = (self.background_index + 1) % len(self.background_images)
+            if self.background_index == len(self.background_images) - 1:
+                self.background_speed = 0
+        background_image = self.background_images[self.background_index]
+        self.gamedisplay.blit(background_image, (0, self.background_y))
+        next_background_index = (self.background_index + 1) % len(self.background_images)
+        next_background_image = self.background_images[next_background_index]
+        self.gamedisplay.blit(next_background_image, (0, self.background_y - self.background_height))
 
 
-
-def background():
-    global background_y, background_index, background_speed
-    background_y += background_speed
-    if background_y >= background_height:
-        background_y = 0
-        background_index = (background_index + 1) % len(background_images)
-        if background_index == len(background_images) - 1:
-            background_speed = 0
-    background_image = background_images[background_index]
-    gamedisplay.blit(background_image, (0, background_y))
-    next_background_index = (background_index + 1) % len(background_images)
-    next_background_image = background_images[next_background_index]
-    gamedisplay.blit(next_background_image, (0, background_y - background_height))
+    def score_system(self):
+        font = pygame.font.SysFont(None, 25)
+        time_elapsed = (pygame.time.get_ticks() - self.start_time) / 1000
+        text = font.render("Time elapsed = {:.1f}s".format(time_elapsed), True, (0, 0, 0))
+        score = font.render("Score = "+str(self.score), True, (255, 0, 0))
+        self.gamedisplay.blit(text, (2, 2))
 
 
+    def car(self):
+        self.gamedisplay.blit(self.carimg, (self.x, self.y))
 
-def car(x, y):
-    gamedisplay.blit(carimg, (x, y))
+    def game_loop(self):
 
-
-
-def game_loop():
-    global background_y,background_speed
-    background_y = 200-display_height
-    x = 340
-    y = 320
-    x_change = 0
-    passed = 0
-    level = 0
-    score = 0
-    bumped = False
-    while not bumped:
-        for event in pygame.event.get():
-            gamedisplay.fill(gray)
-            background()
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                bumped = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    x_change = -5
-                if event.key == pygame.K_RIGHT:
-                    x_change = 5
-                if event.key == pygame.K_UP:
-                    background_speed += 2
-                if event.key == pygame.K_DOWN:
-                    background_speed -= 1
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    x_change = 0
-        x += x_change
-        gamedisplay.fill(gray)
-        background()
-        car(x, y)
-        score_system(passed, score)
-        pygame.display.update()
-        clock.tick(60)
-        if x > 520-car_width or x < 290-car_width:
-            gamedisplay.blit(render_text, (130, 200))
+        while not self.bumped:
+            self.acceleration.play()
+            for event in pygame.event.get():
+                self.gamedisplay.fill(self.gray)
+                self.background()
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    self.bumped = True
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        self.x_change = -5
+                    if event.key == pygame.K_RIGHT:
+                        self.x_change = 5
+                    if event.key == pygame.K_UP:
+                        self.background_speed += 2
+                    if event.key == pygame.K_DOWN:
+                        self.background_speed -= 1
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                        self.x_change = 0
+            self.x += self.x_change
+            self.gamedisplay.fill(self.gray)
+            self.background()
+            self.car()
+            self.score_system()
             pygame.display.update()
-            time.sleep(3)
-            game_loop()
-        if passed > 0 and passed % 10 == 0:
-            level += 1
-            background_speed += 2
+            self.clock.tick(90)
 
-def main_menu():
-    menu_font = pygame.font.SysFont(None, 25)
-    menu_title = pygame.font.SysFont(None, 50)
-    title = menu_title.render("Welcome to 'Speed For Need' Game", True, (255, 152, 255))
-    start = menu_font.render("Press SPACE to start", True, (255, 255, 255))
-    quit = menu_font.render("Press Esc to quit", True, (255, 255, 255))
-    title_rect = title.get_rect(center=(display_width/2, display_height/2 - 200))
-    start_rect = start.get_rect(center=(display_width/2, display_height/2 + 1))
-    quit_rect = quit.get_rect(center=(display_width/2, display_height/2 + 30))
+            if self.x > 520 - self.car_width or self.x < 290 - self.car_width:
+                self.gamedisplay.blit(self.render_text, (120, 150))
+                self.acceleration.stop()
+                self.crashed.play()
+                pygame.display.update()
+                time.sleep(7)
+                self.main_menu()
+                #pygame.quit()
+                #quit()
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    game_loop()
-                if event.key == pygame.K_ESCAPE:
+
+            if self.background_index == len(self.background_images) - 1:
+                time_elapsed = (pygame.time.get_ticks() - self.start_time) / 1000
+                self.score = int(time_elapsed * 10)
+                self.background_speed = 0
+                self.acceleration.stop()
+                if self.background_speed == 0:
+                    self.complete.play()
+                score_sheet = pygame.Surface((400, 300))
+                score_sheet.fill((255, 255, 255))
+                score_sheet_rect = score_sheet.get_rect(center=(self.display_width/2, self.display_height/2))
+                score_sheet.blit(self.small_font_r.render("RESPECT+", 1, (0, 0, 0)), (100, 20))
+                score_sheet.blit(self.small_font.render("Time:", 1, (0, 0, 0)), (50, 140))
+                score_sheet.blit(self.small_font.render("{:.2f} seconds".format(time_elapsed), 1, (255, 0, 0)), (230, 140))
+                self.gamedisplay.blit(score_sheet, score_sheet_rect)
+                pygame.display.update()
+                time.sleep(7)
+                self.main_menu()
+                #pygame.quit()
+                #quit()
+
+  
+    def countdown(self):
+        count = 3
+        countdown_font = pygame.font.Font("Race/pics/PricedownBl.ttf", 200)
+        while count > 0:
+            self.gamedisplay.fill(self.gray)
+            countdown_text = countdown_font.render(str(count), True, (255, 0, 0))
+            countdown_rect = countdown_text.get_rect(center=(self.display_width/2, self.display_height/2))
+            self.gamedisplay.blit(countdown_text, countdown_rect)
+            pygame.display.update()
+            pygame.time.wait(1000) # Wait for 1 second
+            count -= 1
+        self.start_time = pygame.time.get_ticks() # Set the start time
+        self.clock.tick() # Reset the game clock
+
+
+    def main_menu(self):
+        menu_font = pygame.font.SysFont(None, 25)
+        menu_title = pygame.font.SysFont(None, 50)
+        title = menu_title.render("Welcome to 'Need For Sleep'", True, (255, 152, 255))
+        start = menu_font.render("Press SPACE to start", True, (255, 255, 255))
+        quit_text = menu_font.render("Press Esc to quit", True, (255, 255, 255))
+        title_rect = title.get_rect(center=(self.display_width/2, self.display_height/2 - 200))
+        start_rect = start.get_rect(center=(self.display_width/2, self.display_height/2 + 1))
+        quit_rect = quit_text.get_rect(center=(self.display_width/2, self.display_height/2 + 30))
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.start_time = pygame.time.get_ticks()
+                        self.stationair.play()
+                        self.countdown()
+                        self.stationair.stop()
+                        self.game_loop()
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        quit()
+            self.gamedisplay.fill(self.gray)
+            self.gamedisplay.blit(title, title_rect)
+            self.gamedisplay.blit(start, start_rect)
+            self.gamedisplay.blit(quit_text, quit_rect)
+            pygame.display.update()
+            self.clock.tick(60)
 
-        gamedisplay.fill(gray)
-        gamedisplay.blit(title, title_rect)
-        gamedisplay.blit(start, start_rect)
-        gamedisplay.blit(quit, quit_rect)
-        pygame.display.update()
-        clock.tick(60)
-  
-main_menu()
-pygame.quit()
-quit()
+    def run(self):
+        pygame.init()
+        self.main_menu()
+        pygame.quit()
+        quit()
+
+if __name__ == '__main__':
+    game = Game()
+    game.run()

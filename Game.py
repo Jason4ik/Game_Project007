@@ -1,6 +1,6 @@
 from os import system
 import time
-from CarShop import CarShop
+from CarShop import CarShop, Garage
 # from Car import Car
 # from CarRace import CarRace
 import pygame
@@ -27,8 +27,8 @@ class Driver:
         return self.__money
     
     @money.setter
-    def money(self, earnings):
-        self.__money += earnings
+    def money(self, new_money):
+        self.__money = new_money
 
     @property
     def level(self):
@@ -57,8 +57,9 @@ class Game:
     _instance = None
     def __init__(self):
         self.loading()
-        self.drivers = []
+        self.driver = None
         self.songs = ['./Music/Riders-on-the-Storm.mp3', './Music/Skinnyman-Static-X.mp3', './Music/Chingy - I Do.mp3', './Music/Christopher Lawrence - Rush Hour.mp3', './Music/Goldfrapp - Ride A White Horse.mp3','./Music/Need For Speed Carbon Soundtrack - Hard Drivers.mp3']
+        self.music_player_event = threading.Event()
         self.music_player = threading.Thread(target=self.play_music)
         self.music_player.start()
         system('clear')
@@ -83,8 +84,9 @@ SLEEP'''))
         glasses = input('Choose the glasses of a driver[black/transparent]: ')
         gloves = input('Choose the gloves of a driver[black leather/red leather/rose leather]: ')
         shoes = input("Choose the shoes of a driver[sneakers/black boots]: ")
-        self.drivers.append(Driver(name, gender, age, glasses, gloves, shoes))
+        self.driver = Driver(name, gender, age, glasses, gloves, shoes)
         print("Driver successfully created!")
+        input("\nPress Enter to proceed...")
 
     def menu(self):
         system('clear')
@@ -94,19 +96,19 @@ SLEEP'''))
             print(text2art("Main Menu"))
             choice = input("""[1] -> Start race
 [2] -> Check driver stats
-[3] -> Check garage
+[3] -> Enter the garage
 [x] -> Exit the game
 
 """)
             if choice == '1':
-                pass
+                self.start_game()
             elif choice == '2':
                 self.loading()
-                self.drivers[0].check_stats()
-            elif choice == '2':
-                pass
+                self.driver.check_stats()
+            elif choice == '3':
+                self.enter_the_garage()
             if choice != 'x':
-                pass
+                input('\nPress Enter to proceed...')
             elif choice == 'x':
                 self.exit_game()
 
@@ -119,8 +121,10 @@ SLEEP'''))
         system('clear')
 
     def start_game(self):
-        # pygame.
-        pass
+        self.music_player_event.clear()
+        print('Hello world')
+        time.sleep(3)
+        self.music_player_event.set()
 
     def play_music(self):
         pygame.init()
@@ -130,6 +134,7 @@ SLEEP'''))
         pygame.time.delay(372000)
         pygame.mixer.music.load(self.songs[1])
         pygame.mixer.music.play()
+        self.music_player_event.wait()
         pygame.time.delay(203000)
         pygame.mixer.music.load(self.songs[2])
         pygame.mixer.music.play()
@@ -147,13 +152,42 @@ SLEEP'''))
 
 
     def enter_the_garage(self):
-        pass
-    
+        self.loading()
+        self.garage = Garage(self.driver.car_shop)
+        self.garage.show_all_cars()
+        input('\nPress Enter to proceed...')
+        while True:
+            system('clear')
+            print(text2art("Garage"))
+            choice = input('''What do you want to do here?
+            
+[1] - Buy the car
+[2] - Sell the car
+[3] - Back to menu
+
+''')
+            if choice == '1':
+                system('clear')
+                self.garage.car_shop.show_car_dict()
+                name = input('Insert the name of desired car: ')
+                model = input('Insert the model of desired car: ')
+                price = self.garage.car_shop.car_buy(name, model, self.driver.money)
+                self.driver.money = self.driver.money - price
+            elif choice == '2':
+                system('clear')
+                self.garage.show_all_cars()
+                name = input('Insert name of car which you want to sell: ')
+                price = self.driver.car_shop.car_sell(name)
+                self.driver.money = self.driver.money + price
+            elif choice == '3':
+                return 0
+            
+
     def exit_game(self):
         system('clear')
         print(text2art('Thanks for playing!'))
         pygame.quit()
-        exit()
+        exit(0)
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
