@@ -20,9 +20,25 @@ car_dict = {
     "Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "purple", "power": 999, "price": 34000}
 }
 
+from os import system
+import time
+
 class CarShop:
     def __init__(self):
         self.garage = {"Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "purple", "power": 999, "price": 34000}}
+        self.color_code = {
+            "black": "\033[0;30m",
+            "red": "\033[0;31m",
+            "green": "\033[0;32m",
+            "yellow": "\033[0;33m",
+            "blue": "\033[0;34m",
+            "purple": "\033[0;35m",
+            "cyan": "\033[0;36m",
+            "white": "\033[0;37m"
+        }
+
+    def print_with_color(self, color, text):
+        print(self.color_code[color] + text + "\033[0m")
 
     def car_buy(self, car_name, car_model, shop_money: int) -> None:
         car = car_dict.get(car_name)
@@ -32,53 +48,51 @@ class CarShop:
                     self.garage[car_name] = car
                     shop_money -= car["price"]
                     car_color = car["colour"].lower()
-                    color_code = {
-                        "black": "\033[0;30m",
-                        "red": "\033[0;31m",
-                        "green": "\033[0;32m",
-                        "yellow": "\033[0;33m",
-                        "blue": "\033[0;34m",
-                        "purple": "\033[0;35m",
-                        "cyan": "\033[0;36m",
-                        "white": "\033[0;37m"
-                    }.get(car_color, "\033[0m")
-                    print(f"You have bought a {color_code}{car_name}\033[0m for {color_code}${car['price']}\033[0m.")
-                    print(f"Money left: {color_code}${shop_money}{color_code}.")
+                    self.print_with_color(car_color, f"{car_name} is purchased!")
+                    self.print_with_color(car_color, f"Remaining shop money: ${shop_money}")
                 else:
-                    print("You don't have enough money to buy this car.")
+                    self.print_with_color("red", "Sorry, you don't have enough money to buy this car!")
             else:
-                print("You already own this car.")
+                self.print_with_color("red", "You already have this car in your garage!")
         else:
-            print("Car not available in the shop.")
+            self.print_with_color("red", "Sorry, this car is not available in our shop!")
 
-    def car_sell(self, car_name) -> int:
+    def car_sell(self, car_name, sell_price) -> None:
         if car_name in self.garage:
             car = self.garage[car_name]
-            del self.garage[car_name]
-            print(f"{car_name} has been sold.")
-            return car['price']
+            if sell_price >= car["price"]:
+                del self.garage[car_name]
+                self.print_with_color(car["colour"].lower(), f"{car_name} is sold for ${sell_price}")
+            else:
+                self.print_with_color("red", "Sorry, you cannot sell this car for a lower price than you bought it for!")
         else:
-            print(f"{car_name} is not available in the Garage.")
+            self.print_with_color("red", "Sorry, you don't have this car in your garage!")
 
-    def show_all_cars(self):
-        print("List of all cars in the Shop:")
-        for car_name, car_info in car_dict.items():
-            print(f"{car_name}: ${car_info['price']}")
-    def show_cars_in_garage(self):
-        for car_name, car_info in self.garage.items():
-            print(f"{car_name}: {car_info['make']} {car_info['model']} - Top Speed: {car_info['top_speed']} km/h - Acceleration: {car_info['acceleration']} s - Colour: {car_info['colour']} - Power: {car_info['power']} hp - Price: ${car_info['price']}")
+    def show_all_cars(self) -> None:
+        print("Cars available in our shop:")
+        for car in car_dict:
+            car_color = car_dict[car]["colour"].lower()
+            self.print_with_color(car_color, f"{car} - ${car_dict[car]['price']}")
 
+    def garage_list(self) -> None:
+        if len(self.garage) == 1:
+            self.print_with_color("red", "Your garage is empty!")
+        else:
+            print("Cars in your garage:")
+            for car in self.garage:
+                car_color = self.garage[car]["colour"].lower()
+                self.print_with_color(car_color, f"{car} - {self.garage[car]['model']} - ${self.garage[car]['price']}")
 
 
 car_shop = CarShop()
 
 car_shop.show_all_cars()
-car_shop.show_cars_in_garage()
+car_shop.garage_list()
 
 car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
 car_shop.car_buy("Lamborgini Gallardo", "Gallardo", 80000)
 car_shop.car_buy("Lexus ES", "ES", 80000)
 car_shop.car_buy("BMW M3 GTR", "M3 GTR", 80000)
-car_shop.car_sell("Audi TT")
+car_shop.car_sell("Audi TT", 20000)
 
-car_shop.show_cars_in_garage()
+car_shop.garage_list()
