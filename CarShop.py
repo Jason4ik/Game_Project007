@@ -37,35 +37,39 @@ class CarShop:
     def print_with_color(self, color, text):
         print(self.color_code[color] + text + "\033[0m")
 
-    def car_buy(self, car_name, car_model, shop_money: int) -> None:
+    def car_buy(self, car_name, shop_money: int) -> None:
         car = car_dict.get(car_name)
-        if car and car["model"] == car_model:
-            if car_name not in self.garage:
-                if shop_money >= car["price"]:
-                    self.garage[car_name] = car
-                    shop_money -= car["price"]
-                    car_color = car["colour"].lower()
-                    self.print_with_color(car_color, f"{car_name} is purchased!")
-                    self.print_with_color(car_color, f"Remaining shop money: ${shop_money}")
-                    return car["price"]
-                else:
-                    self.print_with_color("red", "Sorry, you don't have enough money to buy this car!")
-                    return 0 
+        if car_name in car_dict.keys():
+            if shop_money >= car["price"]:
+                self.garage[car_name] = car
+                shop_money -= car["price"]
+                car_color = car["colour"].lower()
+                self.print_with_color(car_color, f"{car_name} is purchased!")
+                self.print_with_color(car_color, f"Remaining shop money: ${shop_money}")
+                return car["price"]
             else:
-                self.print_with_color("red", "You already have this car in your garage!")
+                self.print_with_color("red", "Sorry, you don't have enough money to buy this car!")
                 return 0 
+        # else:
+        #     self.print_with_color("red", "You already have this car in your garage!")
+        #     return 0 
         else:
             self.print_with_color("red", "Sorry, this car is not available in our shop!")
             return 0 
 
     def car_sell(self, car_name) -> None:
+        if car_name == 'Lotus Elise':
+            print("You can't sell your first car!")
+            return 0
         if car_name in self.garage:
             car = self.garage[car_name]
             # if sell_price >= car["price"]:
             del self.garage[car_name]
             self.print_with_color(car["colour"].lower(), f"{car_name} is sold for $" + str(car["price"]))
+            return car['price']
         else:
             self.print_with_color("red", "Sorry, you don't have this car in your garage!")
+            return 0
 
     def show_all_cars(self) -> None:
         print("Cars available in our shop:")

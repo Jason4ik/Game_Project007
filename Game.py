@@ -1,13 +1,12 @@
 from os import system
 import time
 from CarShop import CarShop
-# from Car import Car
+from Car import Car
 from CarRace import CarRace
 import pygame
 from art import *
 from tqdm import trange
 import threading
-import json
 
 class Driver:
     def __init__(self, name: str, gender:str, age: int, glasses: str, gloves: str, shoes: str):
@@ -18,6 +17,7 @@ class Driver:
         self.shoes = shoes
         self.gender = gender
         self.car_shop = CarShop()
+        self.races = 0
         self.__level = 0
         self.__xp = 0
         self.__money = 50000
@@ -37,8 +37,9 @@ class Driver:
     @level.setter
     def level(self, xp):
         self.__xp += xp
-        if self.__xp > 1000:
+        if self.__xp >= 1000:
             self.__level += 1
+            self.__xp = self.__xp - 1000
 
     def check_stats(self):
         system('clear')
@@ -48,6 +49,7 @@ class Driver:
         print(f'\tMoney:      {self.__money}$')
         print(f'\tLevel:      {self.__level}')
         print(f'\tXP:         {self.__xp}')
+        print(f'\tRaces done: {self.races}')
         print(f'\tGlasses:    {self.glasses}')
         print(f'\tGloves:     {self.gloves}')
         print(f'\tShoes:      {self.shoes}')
@@ -58,8 +60,7 @@ class Game:
         self.loading()
         self.driver = None
         self.songs = ['./Music/Riders-on-the-Storm.mp3', './Music/Skinnyman-Static-X.mp3', './Music/Chingy - I Do.mp3', './Music/Christopher Lawrence - Rush Hour.mp3', './Music/Goldfrapp - Ride A White Horse.mp3','./Music/Need For Speed Carbon Soundtrack - Hard Drivers.mp3']
-        self.stop_event = threading.Event()
-        self.music_player = threading.Thread(target=self.play_music, args=(self.stop_event, ))
+        self.music_player = threading.Thread(target=self.play_music)
         self.music_player.start()
         system('clear')
         print(text2art('''WELCOME TO
@@ -72,8 +73,6 @@ SLEEP'''))
         self.driver_creation()
         self.menu()
 
-    def load_savings(self):
-        pass
 
     def driver_creation(self):
         system('clear')
@@ -124,34 +123,39 @@ SLEEP'''))
         self.race.Start_Game()
         self.race.choose_car()
         self.race.go()
-        # self.game_thread = threading.Thread(target=self.race.exp)
-        # self.game_thread.start()
-        self.stop_event.set()
-        self.race.exp()
+        pygame.mixer.quit()
+        # pygame.quit()
+        result = self.race.exp()
+        self.driver.races += 1
+        if result == 1:
+            self.driver.money = self.driver.money + 10000
+            self.driver.level = 1000
+        elif result == 0:
+            self.driver.money = self.driver.money + 1000
+            self.driver.level = 100
 
-    def play_music(self, stop_event):
-        while not stop_event.is_set():
-            pygame.init()
-            pygame.mixer.music.load(self.songs[0])
-            pygame.mixer.music.set_volume(0.15)
-            pygame.mixer.music.play()
-            pygame.time.delay(372000)
-            pygame.mixer.music.load(self.songs[1])
-            pygame.mixer.music.play()
-            pygame.time.delay(203000)
-            pygame.mixer.music.load(self.songs[2])
-            pygame.mixer.music.play()
-            pygame.time.delay(237000)
-            pygame.mixer.music.load(self.songs[3])
-            pygame.mixer.music.play()
-            pygame.time.delay(243000)
-            pygame.mixer.music.load(self.songs[4])
-            pygame.mixer.music.play()
-            pygame.time.delay(201000)
-            pygame.mixer.music.load(self.songs[5])
-            pygame.mixer.music.play()
-            pygame.time.delay(216000)
 
+    def play_music(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load(self.songs[0])
+        pygame.mixer.music.set_volume(0.15)
+        pygame.mixer.music.play()
+        pygame.time.delay(372000)
+        pygame.mixer.music.load(self.songs[1])
+        pygame.mixer.music.play()
+        pygame.time.delay(203000)
+        pygame.mixer.music.load(self.songs[2])
+        pygame.mixer.music.play()
+        pygame.time.delay(237000)
+        pygame.mixer.music.load(self.songs[3])
+        pygame.mixer.music.play()
+        pygame.time.delay(243000)
+        pygame.mixer.music.load(self.songs[4])
+        pygame.mixer.music.play()
+        pygame.time.delay(201000)
+        pygame.mixer.music.load(self.songs[5])
+        pygame.mixer.music.play()
+        pygame.time.delay(216000)
 
 
     def enter_the_garage(self):
@@ -166,16 +170,23 @@ SLEEP'''))
 [1] - Buy the car
 [2] - Sell the car
 [3] - Show my cars
-[4] - Back to menu
+[4] - Tuning
+[x] - Back to menu
 
 ''')
             if choice == '1':
                 system('clear')
                 self.driver.car_shop.show_all_cars()
                 name = input('Insert the name of desired car: ')
-                model = input('Insert the model of desired car: ')
-                price = self.driver.car_shop.car_buy(name, model, self.driver.money)
-                self.driver.money = self.driver.money - price
+                car = Car(car_name=name)
+                system('clear')
+                car.get_info()
+                choice = input("Youy sure you want to buy this car?[y/n]")
+                if choice.lower() == 'y':
+                    price = self.driver.car_shop.car_buy(name, self.driver.money)
+                    self.driver.money = self.driver.money - price
+                elif choice.lower() == 'n':
+                    continue
             elif choice == '2':
                 system('clear')
                 self.driver.car_shop.garage_list()
@@ -184,10 +195,12 @@ SLEEP'''))
                 self.driver.money = self.driver.money + price
             elif choice == '3':
                 self.driver.car_shop.garage_list()
-            if choice != '4':
-                input("Press Enter to proceed...")
             elif choice == '4':
+                pass
+            if choice == 'x':
                 return 0
+            elif choice != 'x':
+                input("Press Enter to proceed...")
             
 
     def exit_game(self):
@@ -200,6 +213,7 @@ SLEEP'''))
         if not cls._instance:
             cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
+
 
 if __name__ == "__main__":
     game = Game()

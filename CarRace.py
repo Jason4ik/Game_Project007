@@ -4,6 +4,7 @@ from CarShop import car_dict
 from CarShop import CarShop
 import sys
 import Race.race
+import threading
 
 
 maps = {
@@ -78,13 +79,14 @@ class CarRace:
 
     def exp(self):
         race_game = Race.race.Game()
-        time.sleep(2)
         result = race_game.run()
 
         if result == 1:
             print("You earned 1000 xp and 10000 money")
+            return 1
         elif result == 0:
             print("You earned 100 xp and 1000 money")
+            return 0
     
     def faster(self):
         if self.my_car_speed < self.enemy_car_speed:    
