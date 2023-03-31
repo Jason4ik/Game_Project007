@@ -1,4 +1,4 @@
-from CarShop import car_dict
+from CarShop import CarShop, car_dict
 import random 
 from art import *
 from termcolor2 import c
@@ -73,7 +73,7 @@ class Car:
             else:
                 print(f"Unknown upgrade: {upgrade}")
                             
-car = Car("Aston Martin DB9")
+car = Car()
 car.get_info()
 car.start()
 car.speed_up(50)

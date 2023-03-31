@@ -1,6 +1,6 @@
 from os import system
 import time
-from CarShop import CarShop, Garage
+from CarShop import CarShop
 # from Car import Car
 # from CarRace import CarRace
 import pygame
@@ -121,10 +121,7 @@ SLEEP'''))
         system('clear')
 
     def start_game(self):
-        self.music_player_event.clear()
-        print('Hello world')
-        time.sleep(3)
-        self.music_player_event.set()
+        pass
 
     def play_music(self):
         pygame.init()
@@ -134,7 +131,6 @@ SLEEP'''))
         pygame.time.delay(372000)
         pygame.mixer.music.load(self.songs[1])
         pygame.mixer.music.play()
-        self.music_player_event.wait()
         pygame.time.delay(203000)
         pygame.mixer.music.load(self.songs[2])
         pygame.mixer.music.play()
@@ -153,8 +149,7 @@ SLEEP'''))
 
     def enter_the_garage(self):
         self.loading()
-        self.garage = Garage(self.driver.car_shop)
-        self.garage.show_all_cars()
+        self.driver.car_shop.garage_list()
         input('\nPress Enter to proceed...')
         while True:
             system('clear')
@@ -163,19 +158,20 @@ SLEEP'''))
             
 [1] - Buy the car
 [2] - Sell the car
-[3] - Back to menu
+[3] - Show my cars
+[4] - Back to menu
 
 ''')
             if choice == '1':
                 system('clear')
-                self.garage.car_shop.show_car_dict()
+                self.driver.car_shop.show_all_cars()
                 name = input('Insert the name of desired car: ')
                 model = input('Insert the model of desired car: ')
-                price = self.garage.car_shop.car_buy(name, model, self.driver.money)
+                self.driver.car_shop.car_buy(name, model, self.driver.money)
                 self.driver.money = self.driver.money - price
             elif choice == '2':
                 system('clear')
-                self.garage.show_all_cars()
+                self.driver.car_shop.garage_list()
                 name = input('Insert name of car which you want to sell: ')
                 price = self.driver.car_shop.car_sell(name)
                 self.driver.money = self.driver.money + price
