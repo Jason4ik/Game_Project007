@@ -20,9 +20,6 @@ car_dict = {
     "Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "purple", "power": 999, "price": 34000}
 }
 
-from os import system
-import time
-
 class CarShop:
     def __init__(self):
         self.garage = {"Lotus Elise": {"make": "Lotus", "model": "Elise", "top_speed": 300, "acceleration": 7, "colour": "purple", "power": 999, "price": 34000}}
