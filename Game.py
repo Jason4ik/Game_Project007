@@ -131,6 +131,8 @@ SLEEP'''))
         pygame.mixer.quit()
         # pygame.quit()
         result = self.race.exp()
+        self.music_player = threading.Thread(target=self.play_music)
+        self.music_player.start()
         self.driver.races += 1
         if result == 1:
             self.driver.money = self.driver.money + 10000
