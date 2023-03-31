@@ -47,21 +47,23 @@ class CarShop:
                     car_color = car["colour"].lower()
                     self.print_with_color(car_color, f"{car_name} is purchased!")
                     self.print_with_color(car_color, f"Remaining shop money: ${shop_money}")
+                    return car["price"]
                 else:
                     self.print_with_color("red", "Sorry, you don't have enough money to buy this car!")
+                    return 0 
             else:
                 self.print_with_color("red", "You already have this car in your garage!")
+                return 0 
         else:
             self.print_with_color("red", "Sorry, this car is not available in our shop!")
+            return 0 
 
     def car_sell(self, car_name) -> None:
         if car_name in self.garage:
             car = self.garage[car_name]
-            if sell_price >= car["price"]:
-                del self.garage[car_name]
-                self.print_with_color(car["colour"].lower(), f"{car_name} is sold for ${car['price']}")
-            else:
-                self.print_with_color("red", "Sorry, you cannot sell this car for a lower price than you bought it for!")
+            # if sell_price >= car["price"]:
+            del self.garage[car_name]
+            self.print_with_color(car["colour"].lower(), f"{car_name} is sold for $" + str(car["price"]))
         else:
             self.print_with_color("red", "Sorry, you don't have this car in your garage!")
 
@@ -81,15 +83,15 @@ class CarShop:
                 self.print_with_color(car_color, f"{car} - {self.garage[car]['model']} - ${self.garage[car]['price']}")
 
 
-car_shop = CarShop()
+#car_shop = CarShop()
 
-car_shop.show_all_cars()
-car_shop.garage_list()
+#car_shop.show_all_cars()
+#car_shop.garage_list()
 
-car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
-car_shop.car_buy("Lamborgini Gallardo", "Gallardo", 80000)
-car_shop.car_buy("Lexus ES", "ES", 80000)
-car_shop.car_buy("BMW M3 GTR", "M3 GTR", 80000)
-car_shop.car_sell("Audi TT", 20000)
+#car_shop.car_buy("Audi TT", "3.2 quattro", 50000)
+#car_shop.car_buy("Lamborgini Gallardo", "Gallardo", 80000)
+#car_shop.car_buy("Lexus ES", "ES", 80000)
+#car_shop.car_buy("BMW M3 GTR", "M3 GTR", 80000)
+#car_shop.car_sell("Audi TT")
 
-car_shop.garage_list()
+#car_shop.garage_list()

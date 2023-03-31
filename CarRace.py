@@ -1,7 +1,7 @@
 import random
 import time
 from CarShop import car_dict
-from CarShop import my_garage
+from CarShop import CarShop
 
 
 maps = {
@@ -9,7 +9,6 @@ maps = {
     "Nürnburgring": {"length": 20.88, "difficulty": "medium"},
     "Monaco": {"lenght": 31.63, "difficulty": "hard"}
 }
-
 class CarRace:
     def __init__(self):
         self = self
@@ -24,11 +23,11 @@ class CarRace:
         self.win = []
 
     def __str__(self):
-        return (f'Available Cars {my_garage.show_all_cars}')
+        return (f'Available Cars {list(CarShop.garage_list)}')
 
 
     def choose_car(self):       
-        return my_garage.show_all_cars()
+        return CarShop.garage_list
 
     
 
@@ -85,7 +84,7 @@ class CarRace:
         if self.my_car_speed < self.enemy_car_speed:    
             print("Oh NO! Your enemy is far ahead you need to accelerate...")
             time.sleep(0.5)
-            choice = input("PRESS 2 TO SPEED UP OR 1 TO SPEED DOWN")
+            choice = input("PRESS 2 TO SPEED UP OR 1 TO SPEED DOWN: ")
             if choice == "2":
                 self.my_car_speed = self.my_car_speed *1.2
                 time.sleep(0.5)
@@ -110,16 +109,7 @@ class CarRace:
                             time.sleep(1.5)
                             self.win.append(1)
                             print("WIN")
-                    #player earned lot of xp and mones
-                        elif choice == "2":
-                            self.my_car_speed = self.my_car_speed *1.2
-                            time.sleep(0.5)
-                            print(f'You accelerated. New Speed: {self.my_car_speed}')
-                            if self.my_car_speed > 100:
-                                time.sleep(0.5)
-                                print("You were way too fast and crashed into the wall")
-                                print("GAME OVER")
-                    #Player earned less xp, less money
+                   
 
               
             elif choice == "1":
@@ -144,10 +134,10 @@ class CarRace:
         
 
 
-my_game = CarRace()
+# my_game = CarRace()
 
-my_game.Start_Game()
-my_game.choose_car()
-my_game.go()
-my_game.faster()
-my_game.exp()
+# my_game.Start_Game()
+# my_game.choose_car()
+# my_game.go()
+# my_game.faster()
+# my_game.exp()
